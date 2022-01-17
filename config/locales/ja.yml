@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    models:
+      reservation: 予約情報
+    attributes:
+      reservation:
+        chiket_sheets: 枚数

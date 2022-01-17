@@ -1,0 +1,45 @@
+table.list,table.attr{
+  font-size: 90%;
+  width: 70%;
+}
+table.list th,table.attr th{
+  background-color: #000;
+  color:white;
+  font-weight: normal;
+}
+table.list td,table.list th,
+table.attr td,table.attr th{
+  padding:4px;
+}
+table.list th{
+  text-align:center;
+}
+table.attr th{
+  text-align: right;
+}
+table.list td,table.attr td{
+  background-color: #888;
+}
+table{
+  margin:auto;
+}
+table.list td{
+  color: #000;
+}
+ /* 作品名のリンク */
+table.list a { 
+  text-decoration: none;
+  color: #ef0404;
+}
+
+ /* 作品名のリンク（未訪問） */
+table.list a:link { color: rgb(6, 251, 136); }
+
+ /* 作品名のリンク（訪問済） */
+table.list a:visited { color: #ef0404; }
+
+ /* 作品名のリンク（マウスを合わせたとき） */
+table.list a:hover {
+  color: rgb(253, 146, 5);
+  text-decoration: underline;
+}

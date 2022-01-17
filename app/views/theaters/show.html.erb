@@ -1,0 +1,14 @@
+<%@page_title = "movies#show"%>
+<h1><%=@page_title %></h1>
+<h2><%=@theater.store_name%></h2>
+<%@movie = []%>
+<%@schedules.each_with_index do |s,i|%>
+    <%@movie[i] = Movie.find_by(id:s.movie_id).title%>
+<%end%>
+<%@new_movie = @movie.uniq%>
+<%@new_movie.each do |m|%>
+    <ul>
+        <%=link_to m,[@theater,Movie.find_by(title: m)]%>
+    </ul>
+<%end %>
+<div style="text-align:right"><%= link_to "戻る",:theaters %></div>

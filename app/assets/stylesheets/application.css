@@ -13,3 +13,83 @@
  *= require_tree .
  *= require_self
  */
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+.grovalNavigation{
+    background-color: #000;
+    height: 70px;
+    text-align: center;
+    color: #fff;
+}
+main{
+    min-height: 100vh;
+    display: flex;
+    margin-top: 10px;
+}
+.content{
+    flex: 1;
+    background-color: #eee;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.localNavigation{
+    width: 300px;
+    text-align: center;
+    background-color: #888;
+    color: #fff;
+}
+
+.search{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+.search li{
+    display: list-item;
+    list-style: none;
+}
+.toolbar li,
+.local li{
+    display: list-item;
+    list-style: none;
+  }
+/* メニューバー */
+nav.menubar {
+    color: #ccc;
+    font-size: 150%;
+}
+nav.menubar ul {
+    display: flex;
+    list-style: none;
+}
+nav.menubar ul li:not(:last-child):after {
+    color: #ccc;
+    content: " | ";
+    margin: 0 2px;
+}
+
+  /* メニューバーのリンク */
+nav.menubar a { text-decoration: none; }
+
+  /* メニューバーのリンク（未訪問） */
+nav.menubar a:link { color: #ccc; }
+
+  /* メニューバーのリンク（訪問済） */
+nav.menubar a:visited { color: #ccc; }
+
+  /* メニューバーのリンク（マウスを合わせたとき） */
+nav.menubar a:hover {
+    color: #f88;
+    text-decoration: underline;
+}
+
+  /* メニューバーのリンク（現在のページ） */
+nav.menubar span {
+    color: #ff8;
+    font-weight: bold;
+} 
+

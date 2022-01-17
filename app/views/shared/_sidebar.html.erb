@@ -1,0 +1,9 @@
+<%= render "shared/login_form" unless current_member%>
+<h2>最新ニュース</h2>
+<ul>
+<% 5.times do |i| %>
+<li><%= link_to "ニュースの見出し","#" %></li>
+<%end%>
+</ul>
+
+<h2>会員のブログ</h2>

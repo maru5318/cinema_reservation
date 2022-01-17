@@ -1,0 +1,7 @@
+<%@page_title = "reservaiton#show"%>
+<h1><%=@page_title %></h1>
+
+<%= form_for @reservation, as:"reservation" ,url: :step1_reservation,method: :post do |form| %>
+  <%= render "shared/reservation_form", form: form %>
+  <div><%= form.submit %></div>
+<% end %>
