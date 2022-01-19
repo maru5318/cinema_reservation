@@ -1,0 +1,34 @@
+<% @page_title = "予約一覧" %>
+<h1><%= @page_title %></h1>
+
+<% if @reservations.present? %>
+  <table class="list">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>購入者</th>
+        <th>上映作品</th>
+        <th>支払い情報</th>
+        <th>枚数</th>
+        <th>更新時間</th>
+        <th>予約状況</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |r| %>
+        <tr>
+          <td><%= link_to r.id ,[:admin, r] %></td>
+          <td><%= Member.find(r.member_id).name %></td>
+          <td><%= Movie.find(Schedule.find(r.schedule_id).movie_id).title %></td>
+          <td><%= r.payment %></td>
+          <td><%= r.chiket_sheets %></td>
+          <td><%= r.confirm_time %></td>
+          <td><%= r.status == 1 ? "確定予約" : "仮予約"%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%# <%= paginate @articles %>
+<% else %>
+  <p>予約がありません</p>
+<% end %>

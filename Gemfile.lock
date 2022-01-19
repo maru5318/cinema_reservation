@@ -44,13 +44,26 @@ GEM
       tzinfo (~> 1.1)
     arel (9.0.0)
     bcrypt (3.1.16)
+    better_errors (2.9.1)
+      coderay (>= 1.0.0)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
     bindex (0.8.1)
+    binding_of_caller (1.0.0)
+      debug_inspector (>= 0.0.1)
     bootsnap (1.9.3)
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
+    coderay (1.1.3)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
+    date_validator (0.12.0)
+      activemodel (>= 3)
+      activesupport (>= 3)
+    debug_inspector (1.1.0)
+    email_validator (1.6.0)
+      activemodel
     erubi (1.10.0)
     execjs (2.8.1)
     ffi (1.15.4)
@@ -63,6 +76,21 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
+    kaminari-i18n (0.5.0)
+      kaminari
+      rails
     libv8-node (15.14.0.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -75,6 +103,7 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
     method_source (1.0.0)
+    mini_magick (4.11.0)
     mini_mime (1.1.2)
     mini_portile2 (2.6.1)
     mini_racer (0.4.0)
@@ -172,10 +201,17 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
+  better_errors
+  binding_of_caller
   bootsnap (>= 1.1.0)
   byebug
+  date_validator (>= 0.12.0)
+  email_validator (~> 1.6)
   jbuilder (~> 2.5)
+  kaminari
+  kaminari-i18n
   listen (>= 3.0.5, < 3.2)
+  mini_magick (~> 4.8)
   mini_racer (~> 0.4.0)
   puma (~> 3.11)
   rails (~> 5.2.6)

@@ -3,5 +3,6 @@
 
 <%= form_for @reservation, as:"reservation" ,url: :step1_reservation,method: :post do |form| %>
   <%= render "shared/reservation_form", form: form %>
+  <%= form.hidden_field :id,value:@reservation.id%>
   <div><%= form.submit %></div>
 <% end %>

@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
     def create
-        member = Member.find_by(name: params[:name])#name:カラムからパラメータと一致した最初のレコードを返す。
+        member = Member.find_by(login_id: params[:login_id])#login_id:カラムからパラメータと一致した最初のレコードを返す。
         if member&.authenticate(params[:password])
             #&.ぼっち演算子（左辺のオブジェクトがnilだとnilを返し、そうでない場合は右辺のオブジェクトを返す
             cookies[:member_id] = {value: member.id,expires: 100.minutes.from_now}

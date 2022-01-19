@@ -7,8 +7,26 @@ Rails.application.routes.draw do
     resources :movies
   end
   resource :session,only: [:create,:destroy]
-  resource :account,only: [:show,:edit,:destroy]
-  resource :reservation, only: [:show]do
+  resource :account,only: [:show,:new,:edit,:create,:destroy]
+  resource :reservation, only: [:show,:update]do
     post "step1"
+    post "step2"
+    post "step3"
+  end
+  resource :admin do
+    get "admin_login"
+  end
+  namespace :admin do
+    resource :account,only: [:show,:new,:edit,:create,:destroy]
+    resource :session,only: [:create,:destroy]
+    resources :movies do
+      get "search",on: :collection
+    end
+    resources :reservations do
+      get "search",on: :collection
+    end
+    resources :schedules do
+      get "search",on: :collection
+    end
   end
 end

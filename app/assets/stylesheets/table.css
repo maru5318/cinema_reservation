@@ -1,6 +1,7 @@
 table.list,table.attr{
   font-size: 90%;
   width: 70%;
+  margin-bottom: 20px;
 }
 table.list th,table.attr th{
   background-color: #000;

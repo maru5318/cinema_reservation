@@ -1,31 +1,35 @@
 <table class="attr">
   <tr>
-      <th width = "150">名前</th>
-      <td><%= @member.name %></td>
+    <th width = "150">名前</th>
+    <td><%= @member.name %></td>
   </tr>
   <tr>
-      <th>誕生日</th>
-      <td><%= @member.birthday&.strftime("%Y年%m月%d日") %></td>
-      <%# 『&.(ぼっち演算子)』で左側がnilならnilを返しそうでなければ右側を返すという例外防止になる。 %>
+    <th>誕生日</th>
+    <td><%= @member.birthday&.strftime("%Y年%m月%d日") %></td>
+    <%# 『&.(ぼっち演算子)』で左側がnilならnilを返しそうでなければ右側を返すという例外防止になる。 %>
   </tr>
   <tr>
-      <th>電話番号</th>
-      <td><%= @member.tel %></td>
+    <th>電話番号</th>
+    <td><%= @member.tel %></td>
   </tr>
   <tr>
-      <th>メールアドレス</th>
-      <td><%= @member.email %></td>
+    <th>メールアドレス</th>
+    <td><%= @member.email %></td>
   </tr>
   <tr>
-      <th>支払い情報</th>
-      <td><%= @member.payment%></td>
+    <th>支払い情報</th>
+    <td><%= @member.payment%></td>
   </tr>
   <tr>
-      <th>現在の予約履歴</th>
-      <td>################</td>
+    <th>現在の予約履歴</th>
+    <% Reservation.where(member_id:@member.id).each do |r|%>
+      <%if r.status == 1%>
+        <td><%= Movie.find(Schedule.find(r.schedule_id).movie_id).title%></td>
+      <%end%>
+    <%end%>
   </tr>
   <tr>
-      <th>今までの予約履歴</th>
-      <td>################</td>
+    <th>今までの予約履歴</th>
+    <td>################</td>
   </tr>
 </table>

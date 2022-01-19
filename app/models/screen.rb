@@ -1,4 +1,4 @@
 class Screen < ApplicationRecord
     belongs_to :theater
-    has_many :schedules
+    has_many :seats
 end

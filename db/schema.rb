@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_13_091630) do
+ActiveRecord::Schema.define(version: 2022_01_19_163738) do
 
   create_table "admins", force: :cascade do |t|
     t.string "login_id", null: false
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2022_01_13_091630) do
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
   create_table "members", force: :cascade do |t|
@@ -45,6 +46,16 @@ ActiveRecord::Schema.define(version: 2022_01_13_091630) do
     t.string "director", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reservationdetails", force: :cascade do |t|
+    t.integer "reservation_id", null: false
+    t.integer "ticket_id", null: false
+    t.string "seat"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reservation_id"], name: "index_reservationdetails_on_reservation_id"
+    t.index ["ticket_id"], name: "index_reservationdetails_on_ticket_id"
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -81,6 +92,16 @@ ActiveRecord::Schema.define(version: 2022_01_13_091630) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["theater_id"], name: "index_screens_on_theater_id"
+  end
+
+  create_table "seats", force: :cascade do |t|
+    t.integer "seat_group", null: false
+    t.string "line", null: false
+    t.integer "start_line", null: false
+    t.integer "last_line", null: false
+    t.integer "num", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "theaters", force: :cascade do |t|

@@ -1,0 +1,32 @@
+<table class="attr">
+  <tr>
+    <th><%= form.label :title%></th>
+    <td><%= form.text_field :title,size:8%></td>
+  </tr>
+  <tr>
+    <th><%= form.label :explanation%></th>
+    <td><%= form.text_field :explanation%></td>
+  </tr>
+  <tr>
+    <th><%= form.label :released_at%></th>
+    <td><%= form.date_select :released_at,
+      use_month_numbers: true%></td>
+  </tr>
+  <tr>
+    <th><%= form.label :expired_at%></th>
+    <td><%= form.date_select :expired_at,
+      use_month_numbers: true%></td>
+  </tr>
+  <tr>
+    <th><%= form.label :screening_time%></th>
+    <td><%= form.text_field :screening_time%></td>
+  </tr>
+  <tr>
+    <th><%= form.label :distribution%></th>
+    <td><%= form.text_field :distribution%></td>
+  </tr>
+  <tr>
+    <th><%= form.label :director%></th>
+    <td><%= form.text_field :director%></td>
+  </tr>
+</table>

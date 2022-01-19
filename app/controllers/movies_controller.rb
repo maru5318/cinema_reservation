@@ -3,6 +3,7 @@ class MoviesController < ApplicationController
         @movies = Movie.order(:title)
     end
     def show
+        @movie = Movie.find_by(id: params[:id])
         if params[:theater_id].present?
             @schedule = Schedule.where(theater_id:params[:theater_id],movie_id:params[:id])
             p "来ましたよ"

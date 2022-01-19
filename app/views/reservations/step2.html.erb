@@ -1,0 +1,7 @@
+<%@page_title = "reservation#step2"%>
+<h1><%=@page_title %></h1>
+
+<%= form_for @reservation, as:"reservation" ,url: :step3_reservation,method: :post do |form| %>
+  <%= render "shared/payment_form", form: form %>
+  <%= form.hidden_field :id,value:@reservation.id%>
+<% end %>
