@@ -25,7 +25,7 @@ class ReservationsController < ApplicationController
         end
         p"step1#{total_sheets}"
         if total_sheets == 0
-            redirect_to [Theater.find(Schedule.find(@reservation.schedule_id).theater_id),Movie.find(Schedule.find(@reservation.schedule_id).movie_id)], notice: "枚数を選択してください"
+            render "show" notice: "一枚以上選択してください"
         else
             p"step1111 #{total_sheets}"
         end
