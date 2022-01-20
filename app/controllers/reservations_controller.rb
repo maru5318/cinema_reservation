@@ -25,7 +25,7 @@ class ReservationsController < ApplicationController
         end
         p"step1#{total_sheets}"
         if total_sheets == 0
-            render "show" notice: "一枚以上選択してください"
+            # render "show" notice: "一枚以上選択してください"
         else
             p"step1111 #{total_sheets}"
         end
