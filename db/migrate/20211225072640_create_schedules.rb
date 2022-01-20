@@ -7,6 +7,7 @@ class CreateSchedules < ActiveRecord::Migration[5.2]
       t.date :screening_date,null: false
       t.time :starttime,null: false
       t.time :endtime,null: false
+      t.integer :status,default: 0
       t.timestamps
     end
   end

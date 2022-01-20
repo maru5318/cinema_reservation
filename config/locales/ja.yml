@@ -3,6 +3,8 @@ ja:
     models:
       reservation: 予約情報
       movie: 映画作品
+      member: 会員情報
+      schedule: 上映情報
     attributes:
       reservation:
         chiket_sheets: 枚数
@@ -11,6 +13,14 @@ ja:
         payment: 支払い情報
         confirm_time: 更新時間
         status: 予約状況
+      member:
+        name: 名前
+        email: メールアドレス
+        tel: 電話番号
+        birthday: 誕生日
+        password: パスワード
+        login_id: ログインID
+        payment: 支払い方法
       movie:
         title: タイトル
         explanation: 作品概要
@@ -28,8 +38,9 @@ ja:
         endtime: 上映終了時間
     errors:
       messages:
-        invalid_member_name: は半角英数字で入力してください。
-        #invalid=無効
+        invalid_member_name: は日本語かアルファベットで入力してください。
+        invalid: は無効です。１分以上は必ず入力してください。
         wrong: が正しくありません。
+
         # invalid_image_type: にはJPEG、PNG、GIF、PNG形式の画像を指定してください。
         # duty_duplicate: ですでに選択されているものがあります。

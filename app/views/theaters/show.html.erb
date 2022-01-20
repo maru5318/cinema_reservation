@@ -6,6 +6,7 @@
     <%@movie[i] = Movie.find_by(id:s.movie_id).title%>
 <%end%>
 <%@new_movie = @movie.uniq%>
+<% p "uniq#{@movie.uniq}"%>
 <%@new_movie.each do |m|%>
     <ul>
         <%=link_to m,[@theater,Movie.find_by(title: m)]%>

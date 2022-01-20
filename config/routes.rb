@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root "top#index"
   resources :movies,only:[:index,:show]do
-    
+    get "search",on: :collection
+    get "search_date",on: :collection
   end
   resources :theaters,only:[:index,:show]do
     resources :movies

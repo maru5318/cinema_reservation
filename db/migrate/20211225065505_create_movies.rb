@@ -8,6 +8,7 @@ class CreateMovies < ActiveRecord::Migration[5.2]
       t.integer :screening_time,null: false#上映時間
       t.string :distribution,null: false#配給
       t.string :director,null: false#監督
+      t.integer :status,default: 0
       t.timestamps
     end
   end

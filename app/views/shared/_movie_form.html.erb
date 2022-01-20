@@ -1,3 +1,4 @@
+<%=render "shared/errors",obj:@movie%>
 <table class="attr">
   <tr>
     <th><%= form.label :title%></th>
@@ -7,6 +8,7 @@
     <th><%= form.label :explanation%></th>
     <td><%= form.text_field :explanation%></td>
   </tr>
+  <%if @movie.new_record?%>
   <tr>
     <th><%= form.label :released_at%></th>
     <td><%= form.date_select :released_at,
@@ -21,6 +23,7 @@
     <th><%= form.label :screening_time%></th>
     <td><%= form.text_field :screening_time%></td>
   </tr>
+  <%end%>
   <tr>
     <th><%= form.label :distribution%></th>
     <td><%= form.text_field :distribution%></td>
@@ -28,5 +31,14 @@
   <tr>
     <th><%= form.label :director%></th>
     <td><%= form.text_field :director%></td>
+  </tr>
+  <tr>
+    <th><%=Member.human_attribute_name(:status)%></th>
+    <td>
+      <%= form.radio_button :status,1%>
+      <%= form.label :公開%>
+      <%= form.radio_button :status,0%>
+      <%= form.label :非公開%>
+    </td>
   </tr>
 </table>

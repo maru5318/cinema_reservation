@@ -16,7 +16,12 @@
   </tr>
   <tr>
     <th>上映時間</th>
-    <td><%= @schedule.starttime%> ~ <%= @schedule.endtime%></td>
+    <% endmin = Movie.find(@schedule.movie_id).screening_time.to_i%60%>
+    <%if endmin < 10%>
+    <td><%= "#{@schedule.starttime.hour}:00~#{@schedule.starttime.hour.to_i+(Movie.find(@schedule.movie_id).screening_time.to_i/60)}:0#{endmin}"%></td>
+    <%else%>
+    <td><%= "#{@schedule.starttime.hour}:00~#{@schedule.starttime.hour.to_i+(Movie.find(@schedule.movie_id).screening_time.to_i/60)}:#{endmin}"%></td>
+    <%end%>
   </tr>
   <tr>
     <th>購入枚数</th>

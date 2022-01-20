@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_163738) do
     t.integer "screening_time", null: false
     t.string "distribution", null: false
     t.string "director", null: false
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -79,6 +80,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_163738) do
     t.date "screening_date", null: false
     t.time "starttime", null: false
     t.time "endtime", null: false
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_schedules_on_movie_id"

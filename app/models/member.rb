@@ -14,13 +14,27 @@ class Member < ApplicationRecord
     end
     validates :name, presence: true,
         format: {#format=型、形式,withオプションで与えられた正規表現と:nameがマッチしているかを検証する。
-            with: /\A[A-Za-z][A-Za-z0-9]*\z/,#正規表現
+            with: /\A[A-Za-zぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]*\z/,#正規表現
             allow_blank: true,
             message: :invalid_member_name#バリデーション失敗時にerrorコレクションに追加されるカスタムエラーメッセージ
         },
         # length: { minimum: 2, maximum: 20, allow_blank: true },#length=属性(:name)の値の長さ
         uniqueness: { case_sensitive: false }
-    validates :email,email:{allow_blank: true}
+    validates :email,
+        email:{
+            allow_blank: true
+        },
+        format: { 
+            with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+        }
     validates :birthday,
     date:{before: Proc.new{Date.today}}
+    validates :tel, presence: true,
+    format: { with: /\A[\d\(\)\-]+\z/,allow_blank: true},
+    length: { minimum:8,maximum:20,allow_blank: true},
+    uniqueness: {case_sensitive: false,allow_blank: true}
+    validates :login_id, presence: true,
+    format: { with: /\A[A-Za-z0-9]*\z/,allow_blank: true},
+    length: { minimum:4,maximum:8,allow_blank: true},
+    uniqueness: {case_sensitive: false,allow_blank: true}
 end

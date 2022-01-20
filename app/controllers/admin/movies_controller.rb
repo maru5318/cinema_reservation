@@ -30,7 +30,7 @@ class Admin::MoviesController < Admin::Base
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      redirect_to :admin, notice: "作品を登録しました。"
+      redirect_to :admin_movies, notice: "作品を登録しました。"
     else
       render "new"
     end
@@ -66,6 +66,7 @@ class Admin::MoviesController < Admin::Base
       :screening_time,
       :distribution,
       :director,
+      :status
     ]
 
     # attrs << :password if action_name == "create"

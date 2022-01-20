@@ -24,8 +24,13 @@
           <td><%= s.theater_id %></td>
           <td><%= s.movie_id %></td>
           <td><%= s.screening_date %></td>
-          <td><%= s.starttime %></td>
-          <td><%= s.endtime %></td>
+          <td><%= "#{s.starttime.hour}:00" %></td>
+          <% endmin = Movie.find(s.movie_id).screening_time.to_i%60%>
+          <%if endmin < 10%>
+          <td><%= "#{s.starttime.hour.to_i+(Movie.find(s.movie_id).screening_time.to_i/60)}:0#{endmin}"%></td>
+          <%else%>
+          <td><%= "#{s.starttime.hour.to_i+(Movie.find(s.movie_id).screening_time.to_i/60)}:#{endmin}"%></td>
+          <%end%>
         </tr>
       <% end %>
     </tbody>

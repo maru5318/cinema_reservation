@@ -2,6 +2,7 @@ class Admin::SchedulesController < Admin::Base
   # 会員一覧
   def index
     @schedules = Schedule.order("id")
+    #公開日と今日の日付が7日以内のみの設定をする
   end
 
   # # 検索

@@ -7,8 +7,8 @@ gnames = ["丸","ちぃ","かずき","ルナ","健"]
     Movie.create(
         title: titles[idx],
         explanation: explanations,
-        released_at: "2022-#{rand(1..3)}-#{rand(1..30)}",
-        expired_at: "2022-#{rand(4..12)}-#{rand(1..30)}",
+        released_at: "2021-#{rand(1..3)}-#{rand(1..28)}",
+        expired_at: "2022-#{rand(1..12)}-#{rand(1..28)}",
         screening_time: "#{rand(45..140)}",
         distribution: "Disney movie #{distributions[idx % 4]}",
         director: "#{fnames[idx % 4]} #{gnames[idx % 3]}"

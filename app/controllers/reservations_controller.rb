@@ -23,9 +23,15 @@ class ReservationsController < ApplicationController
                 end
             end
         end
-        p"step1#{total_price}"
+        p"step1#{total_sheets}"
+        if total_sheets == 0
+            redirect_to [Theater.find(Schedule.find(@reservation.schedule_id).theater_id),Movie.find(Schedule.find(@reservation.schedule_id).movie_id)], notice: "枚数を選択してください"
+        else
+            p"step1111 #{total_sheets}"
+        end
         @reservation.chiket_sheets = total_sheets
         @reservation.total_sheets = total_price
+        
         if @reservation.save
             p"更新できました"
         else

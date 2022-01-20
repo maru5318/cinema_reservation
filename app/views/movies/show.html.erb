@@ -1,5 +1,6 @@
 <%@page_title = "movies#show"%>
 <h1><%=@page_title %></h1>
+
 <table class="list">
     <thead>
         <tr>
@@ -24,13 +25,29 @@
 </table>
 <%if @schedule.present?%>
 <table class="list">
+  <tbody>
+  <%
+month = Time.current.month
+day = Time.current.day
+%>
+  <tr>
+    <td><%= link_to "#{month}/#{day}" ,search_date_movies_path(month: month,day: day,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+    <td><%= link_to "#{month}/#{day.to_i + 1}",search_date_movies_path(month: month,day: day.to_i + 1,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+    <td><%= link_to "#{month}/#{day.to_i + 2}",search_date_movies_path(month: month,day: day.to_i + 2,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+    <td><%= link_to "#{month}/#{day.to_i + 3}",search_date_movies_path(month: month,day: day.to_i + 3,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+    <td><%= link_to "#{month}/#{day.to_i + 4}",search_date_movies_path(month: month,day: day.to_i + 4,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+    <td><%= link_to "#{month}/#{day.to_i + 5}",search_date_movies_path(month: month,day: day.to_i + 5,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+    <td><%= link_to "#{month}/#{day.to_i + 6}",search_date_movies_path(month: month,day: day.to_i + 6,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+  </tr> 
+  </tbody>
+</table>
+<table class="list">
     <thead>
         <tr>
             <th>上映日</th>
             <th>スクリーン番号</th>
             <th>開始時間</th>
             <th>終了時間</th>
-            <th>上映時間</th>
             <th>上映時間</th>
         </tr>
     </thead>
@@ -39,16 +56,20 @@
             <tr>
                 <td><%=link_to s.screening_date,reservation_path(schedule_id: s.id)%></td>
                 <td><%=s.screen_no%></td>
-                <td><%=s.starttime%></td>
-                <td><%=s.endtime%></td>
-                <td><%=s.id%></td>
+                <td><%= "#{s.starttime.hour}:00" %></td>
+                <% endmin = Movie.find(s.movie_id).screening_time.to_i%60%>
+                <%if endmin < 10%>
+                <td><%= "#{s.starttime.hour.to_i+(Movie.find(s.movie_id).screening_time.to_i/60)}:0#{endmin}"%></td>
+                <%else%>
+                <td><%= "#{s.starttime.hour.to_i+(Movie.find(s.movie_id).screening_time.to_i/60)}:#{endmin}"%></td>
+                <%end%>
                 <td><%=Movie.find_by(id:s.movie_id).screening_time%></td>
                 <%= hidden_field_tag :schedule_id, :value=>s.id %>
             </tr>
         <%end%>
     </tbody>
 </table>
-<%else%>
+<%elsif @theater%>
     <h2>上映している映画館一覧</h2>
     <table class="list">
     <thead>
@@ -70,4 +91,23 @@
     </tbody>
     </table>
     <div style="text-align:right"><%= link_to "戻る",:movies %></div>
+<%else%>
+    <table class="list">
+  <tbody>
+  <%
+month = Time.current.month
+day = Time.current.day
+%>
+  <tr>
+    <td><%= link_to "#{month}/#{day}" ,search_date_movies_path(month: month,day: day,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+    <td><%= link_to "#{month}/#{day.to_i + 1}",search_date_movies_path(month: month,day: day.to_i + 1,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+    <td><%= link_to "#{month}/#{day.to_i + 2}",search_date_movies_path(month: month,day: day.to_i + 2,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+    <td><%= link_to "#{month}/#{day.to_i + 3}",search_date_movies_path(month: month,day: day.to_i + 3,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+    <td><%= link_to "#{month}/#{day.to_i + 4}",search_date_movies_path(month: month,day: day.to_i + 4,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+    <td><%= link_to "#{month}/#{day.to_i + 5}",search_date_movies_path(month: month,day: day.to_i + 5,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+    <td><%= link_to "#{month}/#{day.to_i + 6}",search_date_movies_path(month: month,day: day.to_i + 6,theater_id:params[:theater_id],movie_id:@movie.id),method: :get%></td>
+  </tr> 
+  </tbody>
+</table>
+<p>該当情報がありません</p>
 <%end%>
