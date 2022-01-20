@@ -13,12 +13,11 @@ class Member < ApplicationRecord
         end
     end
     validates :name, presence: true,
-        format: {#format=型、形式,withオプションで与えられた正規表現と:nameがマッチしているかを検証する。
-            with: /\A[A-Za-zぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]*\z/,#正規表現
-            allow_blank: true,
-            message: :invalid_member_name#バリデーション失敗時にerrorコレクションに追加されるカスタムエラーメッセージ
-        },
-        # length: { minimum: 2, maximum: 20, allow_blank: true },#length=属性(:name)の値の長さ
+        # format: {#format=型、形式,withオプションで与えられた正規表現と:nameがマッチしているかを検証する。
+        #     # with: /\A[A-Za-zぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]*\z/,#正規表現
+        #     # message: :invalid_member_name#バリデーション失敗時にerrorコレクションに追加されるカスタムエラーメッセージ
+        # },
+        length: { minimum: 2, maximum: 20, allow_blank: true },#length=属性(:name)の値の長さ
         uniqueness: { case_sensitive: false }
     validates :email,
         email:{
