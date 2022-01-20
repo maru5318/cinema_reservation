@@ -1,4 +1,3 @@
-
 Admin.create(
     login_id:"0527",
     name:"金子力丸",
