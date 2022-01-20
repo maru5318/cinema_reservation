@@ -19,12 +19,15 @@ class MoviesController < ApplicationController
         @movies = Movie.search(params[:q]).where("status==1")
         render"index"
     end
-    def search_date
-        p "#{params}"
-        day = "#{params[:month]}-#{params[:day]}"
-        @movie = Movie.find(params[:movie_id])
-        @schedule = Movie.search_date(day).where(theater_id:params[:theater_id],movie_id:params[:movie_id])
-        p "検索結果#{@schedule.count}"
+    def date_schedule
+        p "パラメータ#{params}"
+        if params[:theater_id].present?
+            @schedule = Schedule.where("screening_date LIKE ? ","%#{params[:month]}-#{params[:day]}%").where(theater_id: params[:theater_id]).where(movie_id: params[:movie_id])
+            @movie = Movie.find(params[:movie_id])
+        elsif 
+            @theater = Schedule.where(movie_id: params[:movie_id])
+            @movie = Movie.find(params[:movie_id])
+        end
         render"show"
     end
 end

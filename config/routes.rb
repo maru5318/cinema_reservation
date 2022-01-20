@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   root "top#index"
   resources :movies,only:[:index,:show]do
     get "search",on: :collection
-    get "search_date",on: :collection
+    get "date_schedule",on: :collection
   end
   resources :theaters,only:[:index,:show]do
     resources :movies
   end
   resource :session,only: [:create,:destroy]
-  resource :account,only: [:show,:new,:edit,:create,:destroy]
+  resource :account
   resource :reservation, only: [:show,:update]do
     post "step1"
     post "step2"
