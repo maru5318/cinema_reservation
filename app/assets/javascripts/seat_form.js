@@ -1,7 +1,7 @@
 window.onload = Main;
 
 function Main() {
-  let app = new Vue({
+  var app = new Vue({
     el: "#seat_form_app",
     data: {
       min: 99,
