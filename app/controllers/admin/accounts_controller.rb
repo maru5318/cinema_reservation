@@ -3,13 +3,7 @@ class Admin::AccountsController < Admin::Base
     @admin = Admin.new()
   end
   def create
-    @admin = Admin.new(
-      login_id:params[:login_id],
-      name:params[:name],
-      birthday:params[:birthday],
-      tel:params[:tel],
-      email:params[:email],
-    )
+    @admin = Admin.new(admin_account_params)
     if @admin.save!
       cookies[:admin_id] = {value: @admin.id,expires: 10.hours.from_now}
       p "ここ!#{cookies[:admin_id]}"
@@ -17,5 +11,20 @@ class Admin::AccountsController < Admin::Base
     else
       render "new"
     end
+  end
+  # ストロング・パラメータ
+  private def admin_account_params
+    attrs = [
+      :login_id,
+      :name,
+      :birthday,
+      :tel,
+      :email,
+      :password,
+      :password_confirmation
+    ]
+    # attrs << :password if action_name == "create"
+
+    params.require(:admin).permit(attrs)
   end
 end

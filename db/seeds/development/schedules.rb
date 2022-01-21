@@ -6,7 +6,7 @@ endtimes = %w(11:00 14:00 17:00 20:00 23:00)
         screen_no: a,
         theater_id: 1,
         movie_id: rand(1..10),
-        screening_date: Date.today,
+        screening_date: Time.current,
         starttime: Time.parse("#{Date.today}-#{starttimes[c]}"),
         endtime: Time.parse("#{Date.today}-#{endtimes[c]}")
         )

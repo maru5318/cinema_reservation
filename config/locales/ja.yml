@@ -5,6 +5,7 @@ ja:
       movie: 映画作品
       member: 会員情報
       schedule: 上映情報
+      admin: 会員登録
     attributes:
       reservation:
         chiket_sheets: 枚数
@@ -29,6 +30,7 @@ ja:
         screening_time: 上映時間
         distribution: 配給
         director: 監督
+        status: 公開状況
       schedule:
         screen_no: スクリーン番号
         theater_id: 映画館番号
@@ -36,11 +38,19 @@ ja:
         screening_date: 上映日
         starttime: 上映開始時間
         endtime: 上映終了時間
+      admin:
+        name: 名前
+        email: メールアドレス
+        tel: 電話番号
+        birthday: 誕生日
+        password: パスワード
+        login_id: ログインID
     errors:
       messages:
         invalid_member_name: は日本語かアルファベットで入力してください。
         invalid: は無効です。１分以上は必ず入力してください。
         wrong: が正しくありません。
+        release: 公開期間中の非公開はできません
 
         # invalid_image_type: にはJPEG、PNG、GIF、PNG形式の画像を指定してください。
         # duty_duplicate: ですでに選択されているものがあります。

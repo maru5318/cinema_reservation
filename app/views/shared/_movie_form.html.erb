@@ -1,5 +1,6 @@
 <%=render "shared/errors",obj:@movie%>
 <table class="attr">
+  <p><%=@error if @error.present?%></p>
   <tr>
     <th><%= form.label :title%></th>
     <td><%= form.text_field :title,size:8%></td>
@@ -33,12 +34,26 @@
     <td><%= form.text_field :director%></td>
   </tr>
   <tr>
-    <th><%=Member.human_attribute_name(:status)%></th>
+    <th><%=form.label :status%></th>
     <td>
-      <%= form.radio_button :status,1%>
+    <%if @movie.new_record?%>
+      <%= form.radio_button :status,1,disabled: false%>
       <%= form.label :公開%>
-      <%= form.radio_button :status,0%>
+      <%= form.radio_button :status,0,disabled: false%>
       <%= form.label :非公開%>
+    <%else%>
+      <%if @movie.released_at < Time.current%>
+        <%= form.radio_button :status,1,disabled: false%>
+        <%= form.label :公開%>
+        <%= form.radio_button :status,0,disabled: false%>
+        <%= form.label :非公開%>
+      <%else%>
+        <%= form.radio_button :status,1,disabled: true%>
+        <%= form.label :公開%>
+        <%= form.radio_button :status,0,disabled: true%>
+        <%= form.label :非公開%>
+      <%end%>
+    <%end%>
     </td>
   </tr>
 </table>

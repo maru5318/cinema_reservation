@@ -1,4 +1,5 @@
 class Admin::SchedulesController < Admin::Base
+  before_action :admin_login_required
   # 会員一覧
   def index
     @schedules = Schedule.order("id")

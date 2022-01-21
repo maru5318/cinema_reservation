@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
         raise LoginRequired unless current_member
         #例外を発生させている。raise
     end
+    private def admin_login_required
+        raise LoginRequired unless current_admin
+        #例外を発生させている。raise
+    end
     private def rescue_bad_request(exception)
         render "errors/bad_request",status: 400,layout: "error",
         formats: [:html]

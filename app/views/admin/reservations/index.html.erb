@@ -1,17 +1,22 @@
 <% @page_title = "予約一覧" %>
 <h1><%= @page_title %></h1>
 
+<%= form_tag :search_admin_reservations, method: :get, class: "search" do %>
+  <%= text_field_tag "q", params[:q] %>
+  <%= submit_tag "検索" %>
+<% end %>
+
 <% if @reservations.present? %>
   <table class="list">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>購入者</th>
+        <th><%=button_to "ID",{controller: 'reservations',action: 'sort'},{method: :get, params: {sort: "id"}}%></th>
+        <th><%=button_to "購入者",{controller: 'reservations',action: 'sort'},{method: :get, params: {sort: "member_id"}}%></th>
         <th>上映作品</th>
-        <th>支払い情報</th>
-        <th>枚数</th>
-        <th>更新時間</th>
-        <th>予約状況</th>
+        <th><%=button_to "支払い情報",{controller: 'reservations',action: 'sort'},{method: :get, params: {sort: "payment"}}%></th>
+        <th><%=button_to "枚数",{controller: 'reservations',action: 'sort'},{method: :get, params: {sort: "chiket_sheets"}}%></th>
+        <th><%=button_to "更新時間",{controller: 'reservations',action: 'sort'},{method: :get, params: {sort: "confirm_time"}}%></th>
+        <th><%=button_to "予約状況",{controller: 'reservations',action: 'sort'},{method: :get, params: {sort: "status"}}%></th>
       </tr>
     </thead>
     <tbody>

@@ -15,13 +15,14 @@
         <%= render "shared/menubar"%>
       </header>
       <main>
+        <div class = "localNavigation">
         <%if flash.notice%>
         <p class="notice"><%=flash.notice %></p>
         <%end%>
-        <div class = "localNavigation">
           <%= render "shared/localNav"%>
         </div>
         <div class = "content">
+          
           <%=yield%>
         </div>
       </main>

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     end
     resources :reservations do
       get "search",on: :collection
+      get "sort",on: :collection
     end
     resources :schedules do
       get "search",on: :collection

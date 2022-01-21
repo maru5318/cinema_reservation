@@ -3,7 +3,7 @@
 <table class="attr">
   <tr>
     <th width = "150">名前</th>
-    <td><%= @admin.name %></td>
+    <td><%= @admin.name %>  <%=link_to "ログアウト",:admin_session,method: :delete,data:{confirm: "ログアウトしますか?"}%></td>
   </tr>
   <tr>
     <th>誕生日</th>
