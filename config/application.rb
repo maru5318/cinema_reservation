@@ -30,7 +30,12 @@ module Cinema
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    # config.time_zone = "Tokyo"
+    config.time_zone = "Tokyo"
+    
     config.i18n.default_locale = :ja
+
+    config.exceptions_app = ->(env) do
+      ErrorsController.action(:show).call(env)
+    end
   end
 end

@@ -3,15 +3,14 @@
 
 <%= form_tag :search_admin_reservations, method: :get, class: "search" do %>
   <%= text_field_tag "q", params[:q] %>
-  <%= submit_tag "検索" %>
+  <%= submit_tag "検索" %><%=button_to "削除",{controller: 'reservations',action: 'destroys'},{method: :get}%>
 <% end %>
-
 <% if @reservations.present? %>
   <table class="list">
     <thead>
       <tr>
         <th><%=button_to "ID",{controller: 'reservations',action: 'sort'},{method: :get, params: {sort: "id"}}%></th>
-        <th><%=button_to "購入者",{controller: 'reservations',action: 'sort'},{method: :get, params: {sort: "member_id"}}%></th>
+        <th>購入者名</th>
         <th>上映作品</th>
         <th><%=button_to "支払い情報",{controller: 'reservations',action: 'sort'},{method: :get, params: {sort: "payment"}}%></th>
         <th><%=button_to "枚数",{controller: 'reservations',action: 'sort'},{method: :get, params: {sort: "chiket_sheets"}}%></th>
@@ -33,7 +32,7 @@
       <% end %>
     </tbody>
   </table>
-  <%# <%= paginate @articles %>
+  <%= paginate @reservations %>
 <% else %>
   <p>予約がありません</p>
 <% end %>

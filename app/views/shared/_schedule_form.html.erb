@@ -1,11 +1,12 @@
 <table class="attr">
+  <p><%=@error if @error.present?%></p>
   <tr>
     <th><%= form.label :screen_no%></th>
     <td><%= form.select :screen_no,[*1..10]%></td>
   </tr>
   <tr>
     <th><%= form.label :theater_id%></th>
-    <td><%= form.select :theater_id,{"横浜"=>3,"生田"=>1,"神田"=>2}%></td>
+    <td><%= form.select :theater_id,{"生田"=>1,"神田"=>2,"横浜"=>3}%></td>
   </tr>
   <tr>
     <th><%= form.label :movie_id%></th>
@@ -13,7 +14,6 @@
     movies = {}
     @movies.each_with_index do |m,i| 
       movies[m.title] = i + 1
-      p"#{movies[m.title]}です"
     end
     %>
     <td><%= form.select :movie_id,movies%></td>
@@ -27,10 +27,5 @@
     <th><%= form.label :starttime%></th>
     <%starttimes = %w(9:00 12:00 15:00 18:00 21:00) %>
     <td><%= form.select :starttime,starttimes%></td>
-  </tr>
-  <tr>
-    <th><%= form.label :endtime%></th>
-    <%endtimes = %w(11:00 14:00 17:00 20:00 23:00)%>
-    <td><%= form.select :endtime,endtimes%></td>
   </tr>
 </table>

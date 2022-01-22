@@ -15,15 +15,12 @@ class AccountsController < ApplicationController
     end
   end
   def edit
-    if current_member.present?
-      p "current_メンバー#{current_member.name}"
-    else
-      p "NoT_current_メンバー#{current_member.name}"
-    end
+    p "#{current_member.name}-#{current_member.id}"
     @member = current_member
   end
   def update
-    @member = Member.find_by(params[name: params[:name]])
+    @member = current_member
+    p "パラメータ#{account_params}"
     @member.assign_attributes(account_params)
     if @member.save
       redirect_to :root, notice: "個人情報を更新しました。"

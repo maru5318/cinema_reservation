@@ -8,10 +8,9 @@ gnames = ["丸","ちぃ","かずき","ルナ","健"]
         title: titles[idx],
         explanation: explanations,
         released_at: Time.zone.parse("202#{rand(1..2)}-#{rand(1..3)}-#{rand(1..28)}"),
-        expired_at: Time.zone.parse("2022-#{rand(1..12)}-#{rand(1..28)}"),
+        expired_at: Time.zone.parse("2022-#{rand(4..12)}-#{rand(1..28)}"),
         screening_time: "#{rand(45..140)}",
         distribution: "Disney movie #{distributions[idx % 4]}",
         director: "#{fnames[idx % 4]} #{gnames[idx % 3]}"
     )
 end
-

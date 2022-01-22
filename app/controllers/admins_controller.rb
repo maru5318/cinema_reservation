@@ -6,7 +6,7 @@ class AdminsController < ApplicationController
         if current_admin
             @admin = current_admin
         else
-            render "admin_login"
+            redirect_to :admin_login_admin
         end
     end
 end

@@ -1,0 +1,7 @@
+<% @page_title = "上映編集" %>
+<h1><%= @page_title %></h1>
+
+<%= form_for [:admin, @schedule] do |form| %>
+  <%= render "shared/schedule_form", form: form %>
+  <div><%= form.submit %></div>
+<% end %>

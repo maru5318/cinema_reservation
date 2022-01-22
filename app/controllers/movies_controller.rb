@@ -8,8 +8,16 @@ class MoviesController < ApplicationController
     def show
         @movie = Movie.find_by(id: params[:id])
         if params[:theater_id].present?
-            @schedule = Schedule.where(theater_id:params[:theater_id],movie_id:params[:id])
-            p "来ましたよ"
+            a = Date.parse("#{Time.current.year}-0#{Time.current.month}-#{Time.current.day}")
+            @schedule = Schedule.where(theater_id:params[:theater_id],movie_id:params[:id]).where("screening_date >= ?",a)
+            # if schedule.present?
+            #     @schedule = schedule
+            # else
+            #     @schedule = 1
+            # end
+            p "#{@schedule.count}"
+            # p "#{a}"
+            # p "#{a < @schedule[0].screening_date}"
         else
             @movie = Movie.find_by(id: params[:id])
             @theater = Schedule.where(movie_id: @movie.id)

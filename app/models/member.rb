@@ -17,8 +17,7 @@ class Member < ApplicationRecord
         #     with: /\A[a-zA-Z0-9 -/:-@\[-\`\{-\~]*\z/,#正規表現
         #     message: :invalid_member_name#バリデーション失敗時にerrorコレクションに追加されるカスタムエラーメッセージ
         # },
-        length: { minimum: 2, maximum: 20, allow_blank: true },#length=属性(:name)の値の長さ
-        uniqueness: { case_sensitive: false }
+        length: { minimum: 2, maximum: 20, allow_blank: true }#length=属性(:name)の値の長さ
     validates :email,
         email:{
             allow_blank: true
@@ -30,8 +29,7 @@ class Member < ApplicationRecord
     date:{before: Proc.new{Date.today}}
     validates :tel, presence: true,
     format: { with: /\A[\d\(\)\-]+\z/,allow_blank: true},
-    length: { minimum:8,maximum:20,allow_blank: true},
-    uniqueness: {case_sensitive: false,allow_blank: true}
+    length: { minimum:8,maximum:20,allow_blank: true}
     validates :login_id, presence: true,
     format: { with: /\A[A-Za-z0-9]*\z/,allow_blank: true},
     length: { minimum:4,maximum:8,allow_blank: true},

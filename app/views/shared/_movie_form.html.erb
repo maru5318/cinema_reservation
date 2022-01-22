@@ -42,15 +42,15 @@
       <%= form.radio_button :status,0,disabled: false%>
       <%= form.label :非公開%>
     <%else%>
-      <%if @movie.released_at < Time.current%>
-        <%= form.radio_button :status,1,disabled: false%>
-        <%= form.label :公開%>
-        <%= form.radio_button :status,0,disabled: false%>
-        <%= form.label :非公開%>
-      <%else%>
+      <%if @movie.released_at < Time.current && Time.current < @movie.expired_at%>
         <%= form.radio_button :status,1,disabled: true%>
         <%= form.label :公開%>
         <%= form.radio_button :status,0,disabled: true%>
+        <%= form.label :非公開%>
+      <%else%>
+        <%= form.radio_button :status,1,disabled: false%>
+        <%= form.label :公開%>
+        <%= form.radio_button :status,0,disabled: false%>
         <%= form.label :非公開%>
       <%end%>
     <%end%>

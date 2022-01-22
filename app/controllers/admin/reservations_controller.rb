@@ -1,9 +1,8 @@
 class Admin::ReservationsController < Admin::Base
-  before_action :admin_login_required
   # 予約一覧
   def index
     @reservations = Reservation.order("member_id")
-      # .page(params[:page]).per(5)
+      .page(params[:page]).per(5)
   end
   def search
     title_id = Reservation.search(params[:q])
@@ -37,8 +36,18 @@ class Admin::ReservationsController < Admin::Base
     @reservation = Reservation.find(params[:id])
     @reservationdetails = Reservationdetail.where(reservation_id:params[:id])
   end
+  def destroys
+    @reservations = Reservation.order("status")
+    @reservations.each do |re|
+      if re.status == 0
+        re.destroy
+      end
+    end
+    redirect_to "/admin/reservations"
+  end
   def sort
     @reservations = Reservation.order("#{params[:sort]}")
+      .page(params[:page]).per(5)
     render "index"
   end
 end

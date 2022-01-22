@@ -1,9 +1,9 @@
 class Admin::MoviesController < Admin::Base
-  before_action :admin_login_required
   # enum state: %i[arajin aratin]
   # 会員一覧
   def index
     @movies = Movie.order("title")
+      .page(params[:page]).per(5)
   end
 
   # 検索
@@ -47,15 +47,10 @@ class Admin::MoviesController < Admin::Base
           end
         end
       else
-        if @movie.status == 1
-          @error = "現在は公開できません"
-          render "new"
+        if @movie.save
+          redirect_to :admin_movies, notice: "作品を登録しました。"
         else
-          if @movie.save
-            redirect_to :admin_movies, notice: "作品を登録しました。"
-          else
-            render "new"
-          end
+          render "new"
         end
       end
     end
@@ -64,6 +59,7 @@ class Admin::MoviesController < Admin::Base
   # 会員情報の更新
   def update
     @movie = Movie.find(params[:id])
+    p "公開前#{@movie.released_at}と#{Time.current}"
     if @movie.released_at < Time.current && Time.current < @movie.expired_at
       if params[:movie][:status] == "0"
         redirect_to [:edit,:admin, @movie],alert: "公開期間中の作品は非公開にできません"
@@ -76,16 +72,11 @@ class Admin::MoviesController < Admin::Base
         end
       end
     else
-      if params[:movie][:status] == "1"
-        @movie = Movie.find(params[:id])
-        redirect_to [:edit,:admin, @movie],alert: "現在は公開できません"
+      @movie.assign_attributes(movie_params)
+      if @movie.save
+        redirect_to :admin_movies, notice: "作品を更新しました。"
       else
-        @movie.assign_attributes(movie_params)
-        if @movie.save
-          redirect_to :admin_movies, notice: "作品を更新しました。"
-        else
-          render "edit"
-        end
+        render "edit"
       end
     end
   end

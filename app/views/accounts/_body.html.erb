@@ -22,14 +22,24 @@
   </tr>
   <tr>
     <th>現在の予約履歴</th>
+    <% a = Date.parse("#{Time.current.year}-0#{Time.current.month}-#{Time.current.day}")%>
     <% Reservation.where(member_id:@member.id).each do |r|%>
-      <%if r.status == 1%>
-        <td><%= Movie.find(Schedule.find(r.schedule_id).movie_id).title%></td>
+      <%if Schedule.find(r.schedule_id).screening_date > a%>
+        <%if r.status == 1%>
+          <td><%= Movie.find(Schedule.find(r.schedule_id).movie_id).title%></td>
+        <%end%>
       <%end%>
     <%end%>
   </tr>
   <tr>
     <th>今までの予約履歴</th>
-    <td>################</td>
+    <% a = Date.parse("#{Time.current.year}-0#{Time.current.month}-#{Time.current.day}")%>
+    <% Reservation.where(member_id:@member.id).each do |r|%>
+      <%if Schedule.find(r.schedule_id).screening_date < a%>
+        <%if r.status == 1%>
+          <td><%= Movie.find(Schedule.find(r.schedule_id).movie_id).title%></td>
+        <%end%>
+      <%end%>
+    <%end%>
   </tr>
 </table>
