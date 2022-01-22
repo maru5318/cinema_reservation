@@ -1,4 +1,4 @@
-<%if !current_page?(:admin_login_admin) && !current_admin%>
+<%if !(current_page?(:admin_login_admin)||current_page?(:new_admin_account)) && !current_admin%>
 <%= render "shared/login_form" unless current_member %>
 <%end%>
 <div class="local">
