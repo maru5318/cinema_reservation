@@ -91,7 +91,7 @@ class ReservationsController < ApplicationController
     def update
         p "update#{params[:format]}"
         @reservation = Reservation.find(params[:format])
-        @reservation.status = 1
+        @reservation.status = 1 if Reservation.where()
         if @reservation.save
             p"登録できました"
         else
