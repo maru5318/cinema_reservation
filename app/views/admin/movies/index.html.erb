@@ -5,7 +5,7 @@
   <%= text_field_tag "q", params[:q] %>
   <%= submit_tag "検索" %>
 <% end %>
-
+<%=button_to "一括非公開",{controller: 'movies',action: 'changes'},{method: :get}%>
 <div class="toolbar"><%= link_to "作品の新規登録", :new_admin_movie %></div>
 <%if @movies.present?%>
 <table class="list">
@@ -39,7 +39,7 @@
     <%end%>
   </tbody>
 </table>
-<%= paginate @movies%>
+<%= paginate @movies if current_page?(:admin_movies)%>
 <%else%>
   <p>現在公開中の作品がございません</p>
 <%end%>

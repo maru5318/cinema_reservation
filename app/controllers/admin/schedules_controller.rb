@@ -40,7 +40,10 @@ class Admin::SchedulesController < Admin::Base
       render "new"
     end
   end
-
+  def search
+    @schedules = Scedule.search(params[:q])
+    render"index"
+  end
   # def edit
   #   @schedule = Schedule.find(params[:id])
   #   @movies = Movie.order("id")

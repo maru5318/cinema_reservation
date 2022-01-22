@@ -88,6 +88,17 @@ class Admin::MoviesController < Admin::Base
     redirect_to "admin/movies", notice: "会員を削除しました。"
   end
 
+  def changes
+    @movies = Movie.order("title")
+    @movies.each do |m|
+      if m.expired_at < Time.current
+        m.status = 0
+        m.save
+      end
+    end
+    redirect_to :admin_movies, notice: "作品を一括非公開しました。"
+  end
+
   # ストロング・パラメータ
   private def movie_params
     attrs = [

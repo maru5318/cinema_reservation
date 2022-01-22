@@ -32,7 +32,7 @@
       <% end %>
     </tbody>
   </table>
-  <%= paginate @reservations %>
+  <%= paginate @reservations if current_page?(:admin_reservations)%>
 <% else %>
   <p>予約がありません</p>
 <% end %>

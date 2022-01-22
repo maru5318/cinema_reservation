@@ -33,7 +33,7 @@
   </tr>
   <tr>
     <th>お支払い情報</th>
-    <td><%=@reservation.payment%></td>
+    <td><%=Member.find(@reservation.member_id).payment%></td>
   </tr>
 </table>
 <%= link_to reservation_path(@reservation),method: :patch do %>

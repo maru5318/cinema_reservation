@@ -54,14 +54,22 @@
     <tbody>
         <%@schedule.each do |s|%>
         <% a = Date.parse("#{Time.current.year}-0#{Time.current.month}-#{Time.current.day}")%>
-            <%if s.screening_date == a%>
+            <%if s.screening_date >= a%>
             <tr>
                 <td>
                     <%= form_tag(reservation_path, method: :post, class: "movie_schedule") do %>
                     <%= hidden_field_tag "schedule_id", s.id %>
                     <%= label_tag("schedule_#{s.id}") do %>
                     <% end %>
-                    <%= submit_tag("#{s.screening_date.month}/#{s.screening_date.day}", id: "schedule_#{s.id}") %>
+                    <%p "時間#{Time.current.hour}"%>
+                    <%p "時間#{s.endtime.hour}"%>
+                    <% p "ををををを#{Time.zone.parse("#{Time.current.hour}:00").hour}"%>
+                        <%if s.screening_date == a && s.endtime.hour < Time.zone.parse("#{Time.current.hour}:00").hour%>
+                        <%# <%if s.screening_date == a && s.endtime.hour < Time.zone.parse("12:00").hour%>
+                            <%= submit_tag("#{s.screening_date.month}/#{s.screening_date.day}",disabled: true,id: "schedule_#{s.id}") %>
+                        <%else%>
+                            <%= submit_tag("#{s.screening_date.month}/#{s.screening_date.day}", id: "schedule_#{s.id}") %>
+                        <% end %>
                     <% end %>
                 </td>
                 <td><%=s.screen_no%></td>

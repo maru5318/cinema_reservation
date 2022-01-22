@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resource :session,only: [:create,:destroy]
     resources :movies do
       get "search",on: :collection
+      get "changes",on: :collection
     end
     resources :reservations do
       get "search",on: :collection
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
     end
     resources :schedules do
       get "search",on: :collection
+      get "sort",on: :collection
     end
   end
 end

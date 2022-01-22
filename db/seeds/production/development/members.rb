@@ -7,7 +7,7 @@ gnames = ["美優","裕香","圭介","雄太","太郎"]
         birthday: "200#{rand(0..9)}-#{rand(1..12)}-#{rand(1..28)}",
         tel: "0#{rand(8..9)}0-#{rand(1000..9999)}-#{rand(1000..9999)}",
         email: "email@example.com",
-        payment:"#########################",
+        payment:"クレジットカード払い",
         password: "asagao!",
         password_confirmation: "asagao!"
     )
