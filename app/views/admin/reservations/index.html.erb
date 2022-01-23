@@ -3,8 +3,9 @@
 
 <%= form_tag :search_admin_reservations, method: :get, class: "search" do %>
   <%= text_field_tag "q", params[:q] %>
-  <%= submit_tag "検索" %><%=button_to "削除",{controller: 'reservations',action: 'destroys'},{method: :get}%>
+  <%= submit_tag "検索" %>
 <% end %>
+<%=button_to "削除",{controller: 'reservations',action: 'destroys'},{method: :get}%>
 <% if @reservations.present? %>
   <table class="list">
     <thead>
