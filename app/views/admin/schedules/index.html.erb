@@ -2,7 +2,7 @@
 <h1><%= @page_title %></h1>
 
 <div class="toolbar"><%= link_to "上映の新規登録", :new_admin_schedule %></div>
-<%= form_tag :search_admin_movies, method: :get, class: "search" do %>
+<%= form_tag :search_admin_schedules, method: :get, class: "search" do %>
   <%= text_field_tag "q", params[:q] %>
   <%= submit_tag "検索" %>
 <% end %>
