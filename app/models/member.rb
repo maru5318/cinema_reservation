@@ -14,7 +14,7 @@ class Member < ApplicationRecord
     end
     validates :name, presence: true,
         format: {#format=型、形式,withオプションで与えられた正規表現と:nameがマッチしているかを検証する。
-            with: /\A[ぁ-んァ-ン一-龥a-zA-Z]+\z/,#正規表現
+            with: /\A[ぁ-んァ-ン一-龥a-zA-Z\s]+\z/,#正規表現
             allow_blank: true,
             message: :invalid_member_name#バリデーション失敗時にerrorコレクションに追加されるカスタムエラーメッセージ
         },
