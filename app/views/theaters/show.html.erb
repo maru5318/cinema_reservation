@@ -1,4 +1,4 @@
-<%@page_title = "movies#show"%>
+<%@page_title = "movie#show"%>
 <h1><%=@page_title %></h1>
 <h2><%=@theater.store_name%></h2>
 <%@movie = []%>
@@ -28,5 +28,4 @@
     <th><%=Movie.find_by(title: m).released_at%></th>
     <th><%=Movie.find_by(title: m).expired_at%></th>
   </tbody>
-  <%end%>
-<div style="text-align:right"><%= link_to "戻る",:theaters %></div>
+<%end%>
