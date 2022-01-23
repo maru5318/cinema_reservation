@@ -1,7 +1,7 @@
 class Reservation < ApplicationRecord
     belongs_to :member
     belongs_to :schedule
-    has_many :reservationdetails
+    has_many :reservationdetails, dependent: :destroy
     class << self#クラスメソッドを制作する際にクラス名.メソッド名と書かなくて済むself~endの間に記述すれば良い（複数置くことができるメリットがある。）
         def search(query)
             rel = Movie.order("title")#numbreカラムでソートをするという設定を持つリレーションオブジェクトをセット
