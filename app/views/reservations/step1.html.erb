@@ -15,7 +15,7 @@
     seat_total += rel.num
   end
   reserved = Array.new  # 予約済みの座席を取得
-  Reservationdetail.where(reservation_id: Reservation.where(schedule_id: @reservation.schedule_id).where("status == ?",1).ids).each do |val|
+  Reservationdetail.where(reservation_id: Reservation.where(schedule_id: @reservation.schedule_id).where(status:1).ids).each do |val|
     if val then reserved.push(val.seat) end
   end
 %>
