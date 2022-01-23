@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
     def index
-        @movies = Movie.where(status:1)
+        @movies = Movie.where("status == '1'")
     end
     def show
         @movie = Movie.find_by(id: params[:id])
