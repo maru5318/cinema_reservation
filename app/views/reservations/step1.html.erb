@@ -1,5 +1,8 @@
 <%@page_title = "reservation#step1"%>
 <h1><%=@page_title %></h1>
+<head>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
 <p>Step2. 座席を<%= @quantity.values.map(&:to_i).sum %>つ選択してください</p>
 
 <%

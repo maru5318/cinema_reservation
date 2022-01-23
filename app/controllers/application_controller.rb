@@ -14,13 +14,13 @@ class ApplicationController < ActionController::Base
     #StandardErrorクラスを継承してLoginRequiredクラスとForbiddenクラスを定義
 
     # if Rails.env.production? || ENV["RESCUE_EXCEPTIONS"]#救援_例外
-    rescue_from StandardError,with: :rescue_internal_server_error
-    rescue_from ActiveRecord::RecordNotFound,with: :rescue_not_found
-    rescue_from ActionController::ParameterMissing,with: :rescue_bad_request
-    # end
-#rescue_fromの第一引数は、例外のクラスを指定する。withオプションには例外が発生した時に実行するメソッドの名前を指定する。
-    rescue_from LoginRequired,with: :rescue_login_required
-    rescue_from Forbidden,with: :rescue_forbidden
+#     rescue_from StandardError,with: :rescue_internal_server_error
+#     rescue_from ActiveRecord::RecordNotFound,with: :rescue_not_found
+#     rescue_from ActionController::ParameterMissing,with: :rescue_bad_request
+#     # end
+# #rescue_fromの第一引数は、例外のクラスを指定する。withオプションには例外が発生した時に実行するメソッドの名前を指定する。
+#     rescue_from LoginRequired,with: :rescue_login_required
+#     rescue_from Forbidden,with: :rescue_forbidden
     private def login_required
         raise LoginRequired unless current_member
         #例外を発生させている。raise

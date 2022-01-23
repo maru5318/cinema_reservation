@@ -1,8 +1,5 @@
 class MoviesController < ApplicationController
     def index
-        time = "#{Time.current.year}-#{Time.current.month}-#{Time.current.day}"
-        p "time#{time.to_date.class}"
-        p "class #{Movie.first.released_at.class}"
         @movies = Movie.where("status == 1")
     end
     def show
