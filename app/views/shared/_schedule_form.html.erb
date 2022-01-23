@@ -5,11 +5,11 @@
     <td><%= form.select :screen_no,[*1..10]%></td>
   </tr>
   <tr>
-    <th><%= form.label :theater_id%></th>
+    <th><%= form.label "映画館"%></th>
     <td><%= form.select :theater_id,{"生田"=>1,"神田"=>2,"横浜"=>3}%></td>
   </tr>
   <tr>
-    <th><%= form.label :movie_id%></th>
+    <th><%= form.label "作品"%></th>
     <%
     movies = {}
     @movies.each_with_index do |m,i| 

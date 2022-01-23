@@ -89,7 +89,7 @@ nav.menubar a:hover {
 
   /* メニューバーのリンク（現在のページ） */
 nav.menubar span {
-    color: #ff8;
+    color: rgb(220, 220, 31);
     font-weight: bold;
 } 
 

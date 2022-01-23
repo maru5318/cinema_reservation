@@ -25,5 +25,5 @@ class Movie < ApplicationRecord
     validates :explanation, presence: true
     # validates :released_at, presence: true,date:{after: Proc.new{Date.today}}
     # validates :expired_at, presence: true,date:{after: Proc.new{Date.today}}
-    validates :screening_time, presence: true,numericality: { greater_than: 0,message: :invalid}
+    validates :screening_time, presence: true,numericality: { greater_than: 0,less_than:171,allow_blank:true,message: "は1分以上170分以内のものに限ります"}
 end

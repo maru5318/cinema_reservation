@@ -13,25 +13,25 @@ class Member < ApplicationRecord
         end
     end
     validates :name, presence: true,
-        # format: {#format=型、形式,withオプションで与えられた正規表現と:nameがマッチしているかを検証する。
-        #     with: /\A[a-zA-Z0-9 -/:-@\[-\`\{-\~]*\z/,#正規表現
-        #     message: :invalid_member_name#バリデーション失敗時にerrorコレクションに追加されるカスタムエラーメッセージ
-        # },
-        length: { minimum: 2, maximum: 20, allow_blank: true }#length=属性(:name)の値の長さ
-    validates :email,
-        email:{
-            allow_blank: true
+        format: {#format=型、形式,withオプションで与えられた正規表現と:nameがマッチしているかを検証する。
+            with: /\A[ぁ-んァ-ン一-龥a-zA-Z]+\z/,#正規表現
+            allow_blank: true,
+            message: :invalid_member_name#バリデーション失敗時にerrorコレクションに追加されるカスタムエラーメッセージ
         },
+        length: { minimum: 2, maximum: 20, allow_blank: true ,message: 'は2文字以上20字以内で入力してください。'}#length=属性(:name)の値の長さ
+    validates :email,presence:true,
         format: { 
-            with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+            with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,
+            allow_blank: true,
+            message:"は、アルファベットとハイフンを使って---@----.---の形で入力してください"
         }
     validates :birthday,
     date:{before: Proc.new{Date.today}}
     validates :tel, presence: true,
-    format: { with: /\A[\d\(\)\-]+\z/,allow_blank: true},
-    length: { minimum:8,maximum:20,allow_blank: true}
+    format: { with: /\A[\d\(\)\-]+\z/,allow_blank: true,message: 'は数字とハイフンで入力してください。'},
+    length: { minimum:8,maximum:20,allow_blank: true,message: 'は8文字以上20文字以内で入力してください。'}
     validates :login_id, presence: true,
-    format: { with: /\A[A-Za-z0-9]*\z/,allow_blank: true},
-    length: { minimum:4,maximum:8,allow_blank: true},
+    format: { with: /\A[A-Za-z0-9]*\z/,allow_blank: true,message: 'はアルファベットと数字で入力してください。'},
+    length: { minimum:4,maximum:8,allow_blank: true,message: 'は4文字以上8文字以内で入力してください。'},
     uniqueness: {case_sensitive: false,allow_blank: true}
 end

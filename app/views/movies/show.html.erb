@@ -1,7 +1,8 @@
-<%@page_title = "movies#show"%>
+<%@page_title = "上映選択" %>
+<%@page_title = "作品詳細" unless @schedule.present?||@schedule_will.present?%>
 <h1><%=@page_title %></h1>
 
-<table class="list">
+<table class="attr">
     <thead>
         <tr>
             <th>タイトル</th>
@@ -87,7 +88,29 @@
         <%end%>
     </tbody>
 </table>
-<%elsif @theater.present?%>
+<div style="text-align:right"><%= link_to "#{@schedule[0].theater.store_name}での上映中作品一覧を見る",theater_path(@schedule[0].theater_id)%></div>
+<div style="text-align:right"><%= link_to "作品詳細を見る",movie_path(@movie) %></div>
+<%elsif @schedule_will.present?%>
+    <table class="list">
+        <tbody>
+            <%
+            month = Time.current.month
+            day = Time.current.day
+            %>
+            <tr>
+                <td><%= button_to "#{month}/#{day}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params: {theater_id: params[:theater_id], month: month,day: day,movie_id:@movie.id}} %></td>
+                <td><%= button_to "#{month}/#{day.to_i + 1}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 1,movie_id:@movie.id}} %></td>
+                <td><%= button_to "#{month}/#{day.to_i + 2}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 2,movie_id:@movie.id}} %></td>
+                <td><%= button_to "#{month}/#{day.to_i + 3}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 3,movie_id:@movie.id}} %></td>
+                <td><%= button_to "#{month}/#{day.to_i + 4}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 4,movie_id:@movie.id}} %></td>
+                <td><%= button_to "#{month}/#{day.to_i + 5}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 5,movie_id:@movie.id}} %></td>
+                <td><%= button_to "#{month}/#{day.to_i + 6}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 6,movie_id:@movie.id}} %></td>
+            </tr> 
+        </tbody>
+    </table>
+    <p><%="本日#{Time.current.month}/#{Time.current.day}の上映はありません"%></p>
+    <div style="text-align:right"><%= link_to "戻る",movie_path(@movie.id) %></div>
+<%elsif @movie.released_at <= Time.current.since(6.days) && Time.current <= @movie.expired_at && @schedule_day.present?%>
     <h2>上映している映画館一覧</h2>
     <table class="list">
     <thead>
@@ -97,7 +120,7 @@
     </thead>
     <tbody>
         <%@theaters = []%>
-        <%@theater.each_with_index do |t,i| %>
+        <%@schedule_day.each_with_index do |t,i| %>
             <%@theaters[i] = Theater.find_by(id: t.theater_id).store_name%>
         <%end%>
         <%@new_theater = @theaters.uniq %>
@@ -108,25 +131,9 @@
         <%end%>
     </tbody>
     </table>
+    <div style="text-align:right"><%= link_to "映画作品一覧を見る",:movies %></div>
+<%elsif @movie.released_at <= Time.current.since(6.days) && Time.current <= @movie.expired_at && !@schedule_day.present? || !(@movie.released_at <= Time.current.since(6.days) && Time.current <= @movie.expired_at)%>
+    <h2>現在上映されている劇場がございません</h2>
+    <h4><%="#{@movie.released_at}から上映開始です。お楽しみに！" if @movie.released_at > Time.current.since(6.days)%></h4>
     <div style="text-align:right"><%= link_to "戻る",:movies %></div>
-<%else%>
-<table class="list">
-  <tbody>
-  <%
-    month = Time.current.month
-    day = Time.current.day
-  %>
-  <tr>
-    <td><%= button_to "#{month}/#{day}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params: {theater_id: params[:theater_id], month: month,day: day,movie_id:@movie.id}} %></td>
-    <td><%= button_to "#{month}/#{day.to_i + 1}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 1,movie_id:@movie.id}} %></td>
-    <td><%= button_to "#{month}/#{day.to_i + 2}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 2,movie_id:@movie.id}} %></td>
-    <td><%= button_to "#{month}/#{day.to_i + 3}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 3,movie_id:@movie.id}} %></td>
-    <td><%= button_to "#{month}/#{day.to_i + 4}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 4,movie_id:@movie.id}} %></td>
-    <td><%= button_to "#{month}/#{day.to_i + 5}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 5,movie_id:@movie.id}} %></td>
-    <td><%= button_to "#{month}/#{day.to_i + 6}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 6,movie_id:@movie.id}} %></td>
-  </tr> 
-  </tbody>
-</table>
-<p>該当日時に上映はありません</p>
-<div style="text-align:right"><%= link_to "戻る",:movies %></div>
 <%end%>

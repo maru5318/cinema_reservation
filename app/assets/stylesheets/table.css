@@ -30,17 +30,16 @@ table.list td{
  /* 作品名のリンク */
 table.list a { 
   text-decoration: none;
-  color: #ef0404;
 }
 
  /* 作品名のリンク（未訪問） */
-table.list a:link { color: rgb(6, 251, 136); }
+table.list a:link { color: rgb(255, 255, 255); }
 
  /* 作品名のリンク（訪問済） */
-table.list a:visited { color: #ef0404; }
+table.list a:visited { color: rgb(255, 255, 255) }
 
  /* 作品名のリンク（マウスを合わせたとき） */
 table.list a:hover {
-  color: rgb(253, 146, 5);
+  color: rgb(58, 58, 58);
   text-decoration: underline;
 }

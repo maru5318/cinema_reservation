@@ -33,7 +33,7 @@ class ReservationsController < ApplicationController
         @reservation.total_sheets = total_price
         
         if @reservation.save
-            p"更新できました"
+            p"更新できましたstep1"
         else
             p"更新できませんでした"
         end
@@ -43,31 +43,35 @@ class ReservationsController < ApplicationController
         # p "step2#{params}"
         # p "step2#{params[:seats]}"
         @reservationdetails = Reservationdetail.where(reservation_id: params[:reservation][:id])
-        seats = []
-        i = 0
-        params[:seats].each do |s,t|
-            seats[i] = s
-            i = i + 1
-        end
-        # p "step2#{seats}"
-        i = 0
-        @reservationdetails.each do |r|
-            r.seat = seats[i]
-            i = i + 1
-            if r.save
-                p"更新できました"
-            else
-                p"更新できませんでした"
+        unless params[:seats].nil? || params[:seats].keys.size < @reservationdetails.count
+            seats = []
+            i = 0
+            params[:seats].each do |s,t|
+                seats[i] = s
+                i = i + 1
             end
-        end
-        @reservation = Reservation.find_by(id:params[:reservation][:id])
+            # p "step2#{seats}"
+            i = 0
+            @reservationdetails.each do |r|
+                r.seat = seats[i]
+                i = i + 1
+                if r.save
+                    p"更新できましたstep2"
+                else
+                    p"更新できませんでした"
+                end
+            end
+            @reservation = Reservation.find_by(id:params[:reservation][:id])
+        else
+            redirect_to :root, notice:"チケット数分座席を選択してください。お手数ですが最初からやり直してください"
+        end 
     end
     def step3
         p "step3#{params[:reservation][:payment]}"
         @reservation = Reservation.find_by(id:params[:reservation][:id])
         @reservation.payment = params[:reservation][:payment]
         if @reservation.save
-            p"更新できました"
+            p"更新できましたstep3"
         else
             p"更新できませんでした"
         end
@@ -89,13 +93,31 @@ class ReservationsController < ApplicationController
         # p "show#{Seat.where(seat_group: @reservation.schedule.screen_no)}"
     end
     def update
+        check = false
         p "update#{params[:format]}"
         @reservation = Reservation.find(params[:format])
-        @reservation.status = 1 if Reservation.where()
-        if @reservation.save
-            p"登録できました"
+        @reservationdetails = Reservationdetail.where(reservation_id:@reservation.id)
+        @reservationdetails.each do |r|
+            if Reservationdetail.where(seat:r.seat).present?
+                others = Reservationdetail.where(seat:r.seat)
+                others.each do |o|
+                    if o.reservation.status == 1 && o.reservation.schedule.id == r.reservation.schedule.id
+                        check = true
+                    else
+                        p"問題なし"
+                    end
+                end
+            end
+        end
+        if check == true
+            redirect_to :root,notice:"大変申し訳ございません。現在選択された座席は#{current_member.name}様がご予約中に他のお客様を予約を確定してしまいました。お手数おかけしますが最初からやり直してください"
         else
-            p"登録できませんでした"
+            @reservation.status = 1 
+            if @reservation.save
+                p"登録できました"
+            else
+                p"登録できませんでした"
+            end
         end
     end
 end

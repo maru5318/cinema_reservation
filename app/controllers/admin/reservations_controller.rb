@@ -47,7 +47,6 @@ class Admin::ReservationsController < Admin::Base
   end
   def sort
     @reservations = Reservation.order("#{params[:sort]}")
-      .page(params[:page]).per(5)
     render "index"
   end
 end

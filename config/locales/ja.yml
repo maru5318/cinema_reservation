@@ -48,7 +48,7 @@ ja:
     errors:
       messages:
         invalid_member_name: は日本語かアルファベットで入力してください。
-        invalid: は無効です。１分以上は必ず入力してください。
+        # invalid: は無効です。１分以上は必ず入力してください。
         wrong: が正しくありません。
         release: 公開期間中の非公開はできません
 
