@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
     def index
-        @movies = Movie.where("status == '1'")
+        @movies = Movie.where(status:1)
     end
     def show
         @movie = Movie.find_by(id: params[:id])
@@ -21,7 +21,7 @@ class MoviesController < ApplicationController
         end
     end
     def search
-        @movies = Movie.search(params[:q]).where("status==1")
+        @movies = Movie.search(params[:q]).where(status:1)
         render"index"
     end
     def date_schedule
