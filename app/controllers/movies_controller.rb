@@ -27,7 +27,7 @@ class MoviesController < ApplicationController
     def date_schedule
         p "パラメータ#{params}"
         if params[:theater_id].present?
-            @schedule = Schedule.where("screening_date LIKE ? ","%#{params[:month]}-#{params[:day]}%").where(theater_id: params[:theater_id]).where(movie_id: params[:movie_id])
+            @schedule = Schedule.where("to_char(screening_date,'MM-DD') LIKE ? ","%#{params[:month]}-#{params[:day]}%").where(theater_id: params[:theater_id]).where(movie_id: params[:movie_id])
             p "何個ありますか？#{@schedule.count}"
             @movie = Movie.find(params[:movie_id])
         elsif 
