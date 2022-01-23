@@ -101,7 +101,7 @@ class ReservationsController < ApplicationController
             if Reservationdetail.where(seat:r.seat).present?
                 others = Reservationdetail.where(seat:r.seat)
                 others.each do |o|
-                    if o.reservation.status == 1 && o.reservation.schedule.id == r.reservation.schedule.id
+                    if Reservation.find(o.reservation_id).status == 1 && o.reservation.schedule.id == r.reservation.schedule.id
                         check = true
                     else
                         p"問題なし"
