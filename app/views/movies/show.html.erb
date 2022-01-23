@@ -24,7 +24,7 @@
         </tr>
     </tbody>
 </table>
-<%if @schedule.present?%>
+<%if @schedule.present?%><%# 順調に上映がしっかりある時%>
 <table class="list">
   <tbody>
   <%
@@ -90,7 +90,7 @@
 </table>
 <div style="text-align:right"><%= link_to "#{@schedule[0].theater.store_name}での上映中作品一覧を見る",theater_path(@schedule[0].theater_id)%></div>
 <div style="text-align:right"><%= link_to "作品詳細を見る",movie_path(@movie) %></div>
-<%elsif @schedule_will.present?%>
+<%elsif @schedule_will.present?%><%# 上映はあるが当日にない場合%>
     <table class="list">
         <tbody>
             <%
@@ -110,7 +110,7 @@
     </table>
     <p><%="本日#{Time.current.month}/#{Time.current.day}の上映はありません"%></p>
     <div style="text-align:right"><%= link_to "戻る",movie_path(@movie.id) %></div>
-<%elsif @movie.released_at <= Time.current.since(6.days) && Time.current <= @movie.expired_at && @schedule_day.present?%>
+<%elsif @movie.released_at <= Time.current.since(6.days) && Time.current <= @movie.expired_at && @schedule_day.present?%><%# 上映詳細の際にスケジュールがあるものに関して%>
     <h2>上映している映画館一覧</h2>
     <table class="list">
     <thead>
@@ -132,8 +132,26 @@
     </tbody>
     </table>
     <div style="text-align:right"><%= link_to "映画作品一覧を見る",:movies %></div>
-<%elsif @movie.released_at <= Time.current.since(6.days) && Time.current <= @movie.expired_at && !@schedule_day.present? || !(@movie.released_at <= Time.current.since(6.days) && Time.current <= @movie.expired_at)%>
+<%elsif @movie.released_at <= Time.current.since(6.days) && Time.current <= @movie.expired_at && !@schedule_day.present? || !(@movie.released_at <= Time.current.since(6.days) && Time.current <= @movie.expired_at)%><%# 順調に上映がしっかりある時%>
     <h2>現在上映されている劇場がございません</h2>
     <h4><%="#{@movie.released_at}から上映開始です。お楽しみに！" if @movie.released_at > Time.current.since(6.days)%></h4>
     <div style="text-align:right"><%= link_to "戻る",:movies %></div>
+<%else %>
+    <table class="list">
+        <tbody>
+            <%
+            month = Time.current.month
+            day = Time.current.day
+            %>
+            <tr>
+                <td><%= button_to "#{month}/#{day}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params: {theater_id: params[:theater_id], month: month,day: day,movie_id:@movie.id}} %></td>
+                <td><%= button_to "#{month}/#{day.to_i + 1}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 1,movie_id:@movie.id}} %></td>
+                <td><%= button_to "#{month}/#{day.to_i + 2}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 2,movie_id:@movie.id}} %></td>
+                <td><%= button_to "#{month}/#{day.to_i + 3}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 3,movie_id:@movie.id}} %></td>
+                <td><%= button_to "#{month}/#{day.to_i + 4}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 4,movie_id:@movie.id}} %></td>
+                <td><%= button_to "#{month}/#{day.to_i + 5}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 5,movie_id:@movie.id}} %></td>
+                <td><%= button_to "#{month}/#{day.to_i + 6}", {controller: 'movies', action: 'date_schedule'}, {method: :get, params:{theater_id: params[:theater_id], month: month,day: day.to_i + 6,movie_id:@movie.id}} %></td>
+            </tr> 
+        </tbody>
+    </table>
 <%end%>

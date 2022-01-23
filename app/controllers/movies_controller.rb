@@ -11,8 +11,7 @@ class MoviesController < ApplicationController
                 a = Date.parse("#{Time.current.year}-#{Time.current.month}-#{Time.current.day}")
             end
             @schedule = Schedule.where(theater_id:params[:theater_id],movie_id:params[:id]).where("screening_date = ?",a)
-            @schedule_will = Schedule.where(theater_id:params[:theater_id],movie_id:params[:id])
-            p "#{@schedule.count}"
+            @schedule_will = Schedule.where(theater_id:params[:theater_id],movie_id:params[:id]).where("screening_date < ?",a.since(6.days))
         else
             @movie = Movie.find_by(id: params[:id])
             @schedule_day = Schedule.where(movie_id: @movie.id) 
