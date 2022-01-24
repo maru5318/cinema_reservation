@@ -82,6 +82,14 @@
         <td><%= r.schedule.screening_date%></td>
       </tr>
       <tr>
+        <th>上映時間</th>
+        <% if r.schedule.endtime.min < 10%>
+          <td><%= "#{r.schedule.starttime.hour}:00〜#{r.schedule.endtime.hour}:0#{r.schedule.endtime.min}"%></td>
+        <%else%>
+          <td><%= "#{r.schedule.starttime.hour}:00〜#{r.schedule.endtime.hour}:#{r.schedule.endtime.min}"%></td>
+        <%end%>
+      </tr>
+      <tr>
         <th>座席</th>
         <td>
         <%r.reservationdetails.each do |seat|%>
