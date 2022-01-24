@@ -20,26 +20,57 @@
     <th>支払い情報</th>
     <td><%= @member.payment%></td>
   </tr>
-  <tr>
-    <th>現在の予約履歴</th>
-    <% a = Date.parse("#{Time.current.year}-0#{Time.current.month}-#{Time.current.day}")%>
-    <% Reservation.where(member_id:@member.id).each do |r|%>
-      <%if Schedule.find(r.schedule_id).screening_date >= a%>
-        <%if r.status == 1%>
-          <td><%= Movie.find(Schedule.find(r.schedule_id).movie_id).title%></td>
-        <%end%>
-      <%end%>
-    <%end%>
-  </tr>
-  <tr>
-    <th>今までの予約履歴</th>
-    <% a = Date.parse("#{Time.current.year}-0#{Time.current.month}-#{Time.current.day}")%>
-    <% Reservation.where(member_id:@member.id).each do |r|%>
-      <%if Schedule.find(r.schedule_id).screening_date < a%>
-        <%if r.status == 1%>
-          <td><%= Movie.find(Schedule.find(r.schedule_id).movie_id).title%></td>
-        <%end%>
-      <%end%>
-    <%end%>
-  </tr>
 </table>
+
+<h2>現在の予約履歴</h2>
+<% a = Date.parse("#{Time.current.year}-0#{Time.current.month}-#{Time.current.day}")%>
+<% Reservation.where(member_id:@member.id).each do |r|%>
+<table class="list">
+  <%if r.schedule.screening_date >= a%>
+    <%if r.status == 1%>
+      <tr>
+        <th>作品名</th>
+        <td><%= r.schedule.movie.title%></td>
+      </tr>
+      <tr>
+        <th>上映会場</th>
+        <td><%= r.schedule.theater.store_name%></td>
+      </tr>
+      <tr>
+        <th>上映スクリーン</th>
+        <td><%= r.schedule.screen_no%></td>
+      </tr>
+      <tr>
+        <th>上映日</th>
+        <td><%= r.schedule.screening_date%></td>
+      </tr>
+    <%end%>
+  <%end%>
+</table>
+<%end%>
+<h2>今までの予約履歴</h2>
+<% a = Date.parse("#{Time.current.year}-0#{Time.current.month}-#{Time.current.day}")%>
+<% Reservation.where(member_id:@member.id).each do |r|%>
+<table class="list">
+  <%if r.schedule.screening_date < a%>
+    <%if r.status == 1%>
+      <tr>
+        <th>作品名</th>
+        <td><%= r.schedule.movie.title%></td>
+      </tr>
+      <tr>
+        <th>上映会場</th>
+        <td><%= r.schedule.theater.store_name%></td>
+      </tr>
+      <tr>
+        <th>上映スクリーン</th>
+        <td><%= r.schedule.screen_no%></td>
+      </tr>
+      <tr>
+        <th>上映日</th>
+        <td><%= r.schedule.screening_date%></td>
+      </tr>
+    <%end%>
+  <%end%>
+</table>
+<%end%>
