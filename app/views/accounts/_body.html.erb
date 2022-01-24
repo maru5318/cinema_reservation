@@ -25,6 +25,7 @@
 <h2>現在の予約履歴</h2>
 <% a = Date.parse("#{Time.current.year}-0#{Time.current.month}-#{Time.current.day}")%>
 <% Reservation.where(member_id:@member.id).each do |r|%>
+<%if r.status == 1%>
 <table class="list">
   <%if r.schedule.screening_date >= a%>
     <%if r.status == 1%>
@@ -48,9 +49,11 @@
   <%end%>
 </table>
 <%end%>
+<%end%>
 <h2>今までの予約履歴</h2>
 <% a = Date.parse("#{Time.current.year}-0#{Time.current.month}-#{Time.current.day}")%>
 <% Reservation.where(member_id:@member.id).each do |r|%>
+<%if r.status == 1%>
 <table class="list">
   <%if r.schedule.screening_date < a%>
     <%if r.status == 1%>
@@ -73,4 +76,5 @@
     <%end%>
   <%end%>
 </table>
+<%end%>
 <%end%>
