@@ -81,6 +81,14 @@
         <th>上映日</th>
         <td><%= r.schedule.screening_date%></td>
       </tr>
+      <tr>
+        <th>座席</th>
+        <td>
+        <%r.reservationdetails.each do |seat|%>
+          <%= seat.seat%>
+        <%end%>
+        </td>
+      </tr>
     <%end%>
   <%end%>
 </table>
