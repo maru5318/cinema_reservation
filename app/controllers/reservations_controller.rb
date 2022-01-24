@@ -25,7 +25,7 @@ class ReservationsController < ApplicationController
         end
         p"step1#{total_sheets}"
         if total_sheets == 0
-            flash[:alert] = "チケットを選択してください"
+            flash[:notice] = "チケットを選択してください"
             render "show"
         else
             p"step1111 #{total_sheets}"
