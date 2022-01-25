@@ -4,8 +4,8 @@ ends = %w(30 30 30 30 30 30 30 30 30 30 40 40 40 40 40)
     0.upto(14) do |b|
         Seat.create(
             seat_group: a+1,
-            line: lines[b].to_i,
-            start_line: 0,
+            line: lines[b],
+            start_line: 1,
             last_line: ends[b].to_i,
             num: ends[b].to_i
         )
