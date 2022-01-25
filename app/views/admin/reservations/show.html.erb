@@ -18,6 +18,10 @@
     <td><%= Theater.find(Schedule.find(@reservation.schedule_id).theater_id).store_name %></td>
   </tr>
   <tr>
+    <th>上映日時</th>
+    <td><%= Schedule.find(@reservation.schedule_id).screening_date %></td>
+  </tr>
+  <tr>
     <th>上映スクリーン</th>
     <td><%= Schedule.find(@reservation.schedule_id).screen_no %></td>
   </tr>
