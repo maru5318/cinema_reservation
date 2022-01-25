@@ -4,7 +4,7 @@ starttimes = %w(9:00 12:00 15:00 18:00 21:00)
         1.upto(5) do |a|
             0.upto(4) do |c|
                 Schedule.create(
-                screen_no: a,
+                screen_no: 11-a,
                 theater_id: i,
                 movie_id: a,
                 screening_date: Time.current.since(d.days),
@@ -20,7 +20,7 @@ end
         6.upto(10) do |a|
             0.upto(4) do |c|
                 Schedule.create(
-                screen_no: a,
+                screen_no: 11-a,
                 theater_id: i,
                 movie_id: a,
                 screening_date: Time.current.since(d+120.days),
