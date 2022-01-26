@@ -1,10 +1,10 @@
 table.list,table.attr{
   font-size: 90%;
-  width: 70%;
+  width: 50%;
   margin-bottom: 20px;
 }
 table.list th,table.attr th{
-  background-color: #000;
+  text-align: center;
   color:white;
   font-weight: normal;
 }
@@ -14,17 +14,40 @@ table.attr td,table.attr th{
 }
 table.list th{
   text-align:center;
+  width: 25%;
+  background: linear-gradient(#74899f,#08111a);
+  border-left: 1px solid #74899f;
+  border-top: 1px solid #74899f;
+  border-bottom: 1px solid #74899f;
+  box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.557) inset;
+  padding: 2px;
+}
+.button td{
+  width: 100px;
 }
 table.attr th{
   text-align: right;
+  width: 25%;
 }
 table.list td,table.attr td{
   background-color: #888;
+  width: 75%;
 }
 table{
   margin:auto;
+  border-collapse:separate;
+  border-spacing: 0;
+}
+table th:first-child{
+  border-radius: 5px 0 0 5px;
 }
 table.list td{
+  border-radius: 0 5px 5px 0;
+  background: linear-gradient(#c6c1c1,#7e858c);
+  border-left: 1px solid #a8b7c5;
+  border-bottom: 1px solid #a8b7c5;
+  box-shadow: 0px -3px 5px 1px rgba(255, 255, 255, 0.557) inset;
+  border-top:1px solid #a8b7c5;;
   color: #000;
 }
  /* 作品名のリンク */

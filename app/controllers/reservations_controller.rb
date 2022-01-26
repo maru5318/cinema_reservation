@@ -1,6 +1,7 @@
 class ReservationsController < ApplicationController
     before_action :login_required
     def step1
+        flash[:notice] = ""
         # p"#{params}"
         # p"#{params[:reservation][:id]}"
         @reservation = Reservation.find_by(id:params[:reservation][:id])
@@ -27,8 +28,6 @@ class ReservationsController < ApplicationController
         if total_sheets == 0
             flash[:notice] = "チケットを選択してください"
             render "show"
-        else
-            p"step1111 #{total_sheets}"
         end
         @reservation.chiket_sheets = total_sheets
         @reservation.total_sheets = total_price

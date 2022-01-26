@@ -1,24 +1,22 @@
 <%@page_title = "theaters#index"%>
 <h1><%=@page_title %></h1>
-<%if @theaters.present?%>
-<table class="list">
-  <thead>
+<%@theaters.each do |t|%>
+  <%if @theaters.present?%>
+  <table class="list">
     <tr>
       <th>店名</th>
-      <th>住所</th>
-      <th>問い合わせ先</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%@theaters.each do |t|%>
-    <tr>
       <td><%=link_to t.store_name,t%></td>
+    </tr>
+    <tr>
+      <th>住所</th>
       <td><%=t.address%></td>
+    </tr>
+    <tr>
+      <th>問い合わせ先</th>
       <td><%=t.tel%></td>
     </tr>
-    <%end%>
-  </tbody>
-</table>
-<%else%>
-  <p>劇場が登録されていません</p>
+  </table>
+  <%else%>
+    <p>劇場が登録されていません</p>
+  <%end%>
 <%end%>

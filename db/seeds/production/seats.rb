@@ -103,7 +103,7 @@ i_lines = %w(A B C D E F G H I J)
 end
 j_lines = %w(A B C D E F G H I J K L M N O P Q R S T U V)
 j_start = %w(6 6 6 6 6 6 6 6 6 6 5 5 5 4 4 4 3 3 2 2 1 1)
-j_end = %w(25 25 25 25 25 25 25 25 25 25 26 26 26 27 27 28 28 30 30 30 30)
+j_end = %w(25 25 25 25 25 25 25 25 25 25 26 26 26 27 27 28 28 30 30 30 30 30)
 0.upto(21) do |b|
     Seat.create(
         seat_group: 10,

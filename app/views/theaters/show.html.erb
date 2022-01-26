@@ -1,39 +1,47 @@
 <%@page_title = "movie#show"%>
 <h1><%=@page_title %></h1>
 <h2><%=@theater.store_name%></h2>
+
 <%@movie = []%>
 <%@schedules.each_with_index do |s,i|%>
     <%if s.movie.status == 1%>
         <%@movie[i] = s.movie.title%>
     <%end%>
 <%end%>
+
 <%@new_movie = @movie.uniq%>
-<% p "uniq#{@movie.uniq}"%>
-<table class="list">
-  <thead>
-    <th>作品名</th>
-    <th>概要</th>
-    <th>公開日</th>
-    <th>公開終了日</th>
-    <th>上映選択</th>
-  </thead>
-  <%@new_movie.each do |m|%>
-  <tbody>
-  <%if Time.current.month < 10%>
-    <%a = Date.parse("#{Time.current.year}-0#{Time.current.month}-#{Time.current.day}")%>
-  <%else%>
-    <%a = Date.parse("#{Time.current.year}-#{Time.current.month}-#{Time.current.day}")%>
-  <%end%>
-    <td><%=link_to m,movie_path(Movie.find_by(title: m).id)%></td>
-    <td><%=Movie.find_by(title: m).explanation%></td>
-    <td><%=Movie.find_by(title: m).released_at%></td>
-    <td><%=Movie.find_by(title: m).expired_at%></td>
-  <%if Movie.find_by(title:m).released_at <= a.since(6.days) && a <= Movie.find_by(title:m).expired_at%>
-    <td><%=link_to "上映選択へ進む",[@theater,Movie.find_by(title: m)]%></td>
-  <%elsif Movie.find_by(title:m).released_at > a%>
-    <td><%="#{Movie.find_by(title:m).released_at}から公開となります"%></td>
-  <%elsif Movie.find_by(title:m).expired_at < a%>
-    <td>公開期間が終了しました</td>
-  <%end%>
-  </tbody>
+<%@new_movie.each do |m|%>
+  <table class="list">
+    <%if Time.current.month < 10%>
+      <%a = Date.parse("#{Time.current.year}-0#{Time.current.month}-#{Time.current.day}")%>
+    <%else%>
+      <%a = Date.parse("#{Time.current.year}-#{Time.current.month}-#{Time.current.day}")%>
+    <%end%>
+    <tr>
+      <th>作品名</th>
+      <td><%=link_to m,movie_path(Movie.find_by(title: m).id)%></td>
+    </tr>
+    <tr>
+      <th>概要</th>
+      <td><%=Movie.find_by(title: m).explanation%></td>
+    </tr>
+    <tr>
+      <th>公開日</th>
+      <td><%=Movie.find_by(title: m).released_at%></td>
+    </tr>
+    <tr>
+      <th>公開終了日</th>
+      <td><%=Movie.find_by(title: m).expired_at%></td>
+    </tr>
+    <tr>
+      <th>上映選択</th>
+      <%if Movie.find_by(title:m).released_at <= a.since(6.days) && a <= Movie.find_by(title:m).expired_at%>
+        <td><%=link_to "上映選択へ進む",[@theater,Movie.find_by(title: m)]%></td>
+      <%elsif Movie.find_by(title:m).released_at > a%>
+        <td><%="#{Movie.find_by(title:m).released_at}から公開となります"%></td>
+      <%elsif Movie.find_by(title:m).expired_at < a%>
+        <td>公開期間が終了しました</td>
+      <%end%>
+    </tr>
+  </table>
 <%end%>
