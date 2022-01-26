@@ -16,7 +16,7 @@ class Member < ApplicationRecord
         format: {#format=型、形式,withオプションで与えられた正規表現と:nameがマッチしているかを検証する。
             with: /\A[ぁ-んァ-ン一-龥a-zA-Z\s]+\z/,#正規表現
             allow_blank: true,
-            message: :invalid_member_name#バリデーション失敗時にerrorコレクションに追加されるカスタムエラーメッセージ
+            message: "は日本語かアルファベットを空白を開けずに使用してください"#バリデーション失敗時にerrorコレクションに追加されるカスタムエラーメッセージ
         },
         length: { minimum: 2, maximum: 20, allow_blank: true ,message: 'は2文字以上20字以内で入力してください。'}#length=属性(:name)の値の長さ
     validates :email,presence:true,

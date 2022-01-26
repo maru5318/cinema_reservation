@@ -17,23 +17,28 @@ class Admin::SchedulesController < Admin::Base
     @movies = Movie.order("id")
     @schedule = Schedule.new(schedule_params)
     if Movie.find(@schedule.movie_id).released_at < @schedule.screening_date && @schedule.screening_date < Movie.find(@schedule.movie_id).expired_at
-      @schedule.endtime = @schedule.starttime + @schedule.movie.screening_time*60
-      p "上映時間=#{@schedule.movie.screening_time}"
-      p "終了時間=#{@schedule.endtime}"
-      p "劇場=#{@schedule.theater_id}"
-      p "スクリーン=#{@schedule.screen_no}"
-      p "スクリーン=#{@schedule.movie_id}"
-      existing = Schedule.where(theater_id:@schedule.theater_id).where(screen_no:@schedule.screen_no).where(screening_date:@schedule.screening_date).where(starttime:@schedule.starttime)
-      # p "あるかないか=#{Schedule.where(theater_id:@schedule.theater_id).first.id}"
-      if existing.present?
-        @error = "すでに上映が登録されている時間です"
-        render "new"
-      else
-        if @schedule.save
-          redirect_to :admin_schedules, notice: "上映を登録しました。"
-        else
+      if @schedule.screening_date > Time.current
+        @schedule.endtime = @schedule.starttime + @schedule.movie.screening_time*60
+        p "上映時間=#{@schedule.movie.screening_time}"
+        p "終了時間=#{@schedule.endtime}"
+        p "劇場=#{@schedule.theater_id}"
+        p "スクリーン=#{@schedule.screen_no}"
+        p "スクリーン=#{@schedule.movie_id}"
+        existing = Schedule.where(theater_id:@schedule.theater_id).where(screen_no:@schedule.screen_no).where(screening_date:@schedule.screening_date).where(starttime:@schedule.starttime)
+        # p "あるかないか=#{Schedule.where(theater_id:@schedule.theater_id).first.id}"
+        if existing.present?
+          @error = "すでに上映が登録されている時間です"
           render "new"
+        else
+          if @schedule.save
+            redirect_to :admin_schedules, notice: "上映を登録しました。"
+          else
+            render "new"
+          end
         end
+      else
+        @error = "上映登録は明日以降しかできません"
+        render "new"
       end
     else
       @error = "作品公開期間外です"

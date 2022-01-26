@@ -65,7 +65,7 @@
                     <%p "時間#{Time.current.hour}"%>
                     <%p "時間#{s.endtime.hour}"%>
                     <% p "ををををを#{Time.zone.parse("#{Time.current.hour}:00").hour}"%>
-                        <%if s.screening_date == a && s.endtime.hour < Time.zone.parse("#{Time.current.hour}:00").hour%>
+                        <%if s.screening_date == a && s.starttime.hour <= Time.zone.parse("#{Time.current.hour}:00").hour%>
                         <%# <%if s.screening_date == a && s.endtime.hour < Time.zone.parse("12:00").hour%>
                             <%= submit_tag("#{s.screening_date.month}/#{s.screening_date.day}",disabled: true,id: "schedule_#{s.id}") %>
                         <%else%>
@@ -126,7 +126,8 @@
         <%@new_theater = @theaters.uniq %>
         <%@new_theater.each do |t|%>
             <tr>
-                <td><%=link_to t,[Theater.find_by(store_name:t),@movie]%></td>
+                <td><%=link_to "#{t}で#{@movie.title}を見る",[Theater.find_by(store_name:t),@movie]%></td>
+                <td><div style="text-align:right"><%= link_to "#{t}での上映中作品一覧を見る",theater_path(Theater.find_by(store_name:t).id)%></div></td>
             </tr>
         <%end%>
     </tbody>
