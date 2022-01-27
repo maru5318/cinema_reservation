@@ -1,4 +1,4 @@
-/* /*
+/*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
@@ -13,3 +13,142 @@
  *= require_tree .
  *= require_self
  */
+body{
+    display: flex;
+    flex-direction: column;
+    font-family: 'MS Mincho',serif;
+    background-color: #fff;
+    color:#fff;
+}
+.grovalNavigation{
+    background: linear-gradient(rgb(75, 75, 75),#101010);
+    text-align: center;
+    color: #fff;
+    height: 20%;
+    margin-bottom: 5px;
+}
+main{
+    min-height: 100vh;
+    display: flex;
+    height:100vh;
+}
+.content{
+    overflow: scroll;
+    flex: 1;
+    background-color: rgb(14, 14, 14);
+    text-align: center;
+    width: 70%;
+    margin-left: 5px;
+}
+
+.localNavigation{
+    width: 300px;
+    text-align: center;
+    background-color: rgb(152, 152, 152);
+    color: #fff;
+}
+.cinema{
+    margin: 0 0;
+    position: relative;
+    padding: 1.5rem 2rem;
+    border: 4px solid #000;
+}
+.cinema:before,
+.cinema:after {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    content: '';
+    border-top: 4px dotted #000;
+}
+.cinema:before {
+    top: 6px;
+}
+.cinema:after {
+    bottom: 6px;
+}
+.toolbar li,
+.local li{
+    display: list-item;
+    list-style: none;
+  }
+/* メニューバー */
+nav.menubar {
+    color: #ccc;
+    font-size: 150%;
+}
+nav.menubar ul {
+    display: flex;
+    list-style: none;
+    margin: 0px 0;
+}
+nav.menubar ul li:not(:last-child):after {
+    color: #ccc;
+    content: " | ";
+    margin: 0 2px;
+}
+
+  /* メニューバーのリンク */
+nav.menubar a { text-decoration: none; }
+
+  /* メニューバーのリンク（未訪問） */
+nav.menubar a:link { color: #ccc; }
+
+  /* メニューバーのリンク（訪問済） */
+nav.menubar a:visited { color: #ccc; }
+
+  /* メニューバーのリンク（マウスを合わせたとき） */
+nav.menubar a:hover {
+    color: #f88;
+    text-decoration: underline;
+}
+
+  /* メニューバーのリンク（現在のページ） */
+nav.menubar span {
+    color: rgb(220, 220, 31);
+    font-weight: bold;
+} 
+
+
+.search{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+	font-size: 40px;
+	font-weight: 200;
+	text-decoration: none;
+	transition: 0.3s;
+    margin: 130px;
+}
+.search li{
+    display: list-item;
+    list-style: none;
+}
+.search a {
+    color: rgb(255, 255, 255);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    text-decoration: none;
+}
+
+.search a:hover {
+	color: #dcdcdc;
+}
+
+.search p{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 60%;
+    font-size: small;
+    margin: 30px;
+}
+.search a {
+	background-color: #223365;
+    border: 1px solid #223365;
+    border-radius: 40% 45% 0 45%;
+}
+
+.search a:hover {
+	background-color: #334c96;
+	border: 1px solid #829ef0;
+}
