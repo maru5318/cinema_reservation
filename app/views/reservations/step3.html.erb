@@ -1,18 +1,41 @@
 <%@page_title = "reservaiton#step3"%>
 <h1><%=@page_title %></h1>
-
-<table class="attr">
-  <tr>
-    <th>氏名</th>
-    <td><%= @member.name%></td>
-  </tr>
-  <tr>
-    <th>作品名</th>
-    <td><%= Movie.find(@schedule.movie_id).title%></td>
-  </tr>
+<table class="list">
+    <h3 class="listtitle">作品情報</h3>
+    <tr>
+        <th>タイトル</th>
+        <td><%=@movie.title %></td>
+    </tr>
+    <tr>
+        <th>概要</th>
+        <td><%=@movie.explanation %></td>
+    </tr>
+    <tr>
+        <th>公開日</th>
+        <td><%=@movie.released_at %></td>
+    </tr>
+    <tr>
+        <th>上映時間</th>
+        <td><%=@movie.screening_time %></td>
+    </tr>
+    <tr>
+        <th>配給</th>
+        <td><%=@movie.distribution %></td>
+    </tr>
+    <tr>
+        <th>監督</th>
+        <td><%=@movie.director %></td>
+    </tr>
+</table>
+<table class="list">
+  <h3 class="listtitle">予約情報</h3>
   <tr>
     <th>上映日時</th>
     <td><%= @schedule.screening_date%></td>
+  </tr>
+  <tr>
+    <th>上映スクリーン</th>
+    <td><%= @schedule.screen_no%></td>
   </tr>
   <tr>
     <th>上映時間</th>
@@ -24,6 +47,21 @@
     <%end%>
   </tr>
   <tr>
+    <th>座席</th>
+    <td>
+    <% @reservation.reservationdetails.each do |reservation|%>
+    <%=reservation.seat%>
+    <%end%>
+    </td>
+  </tr>
+</table>
+<table class="list">
+  <h3 class="listtitle">決済情報</h3>
+  <tr>
+    <th>氏名</th>
+    <td><%= @member.name%></td>
+  </tr>
+  <tr>
     <th>購入枚数</th>
     <td><%=@reservation.chiket_sheets%>枚</td>
   </tr>
@@ -32,8 +70,8 @@
     <td><%=@reservation.total_sheets%>円</td>
   </tr>
   <tr>
-    <th>お支払い情報</th>
-    <td><%=Member.find(@reservation.member_id).payment%></td>
+    <th>クレジット番号</th>
+    <td><%= "****-****-#{@reservation.member.payment.to_i%10000}"%></td>
   </tr>
 </table>
 <%= link_to reservation_path(@reservation),method: :patch do %>

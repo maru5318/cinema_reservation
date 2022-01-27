@@ -1,27 +1,27 @@
 <%=render "shared/errors",obj:@reservation%>
-<table class="attr">
+<table class="list">
   <tr>
     <th>氏名</th>
-    <td><%= Member.find(@reservation.member_id).name%></td>
+    <td><%= @reservation.member.name%></td>
   </tr>
   <tr>
     <th>お誕生日</th>
-    <td><%= Member.find(@reservation.member_id).birthday%></td>
+    <td><%= @reservation.member.birthday%></td>
   </tr>
   <tr>
     <th>電話番号</th>
-    <td><%= Member.find(@reservation.member_id).tel%></td>
+    <td><%= @reservation.member.tel%></td>
   </tr>
   <tr>
     <th>メールアドレス</th>
-    <td><%=Member.find(@reservation.member_id).email%></td>
+    <td><%= @reservation.member.email%></td>
   </tr>
   <tr>
     <th>お支払い情報</th>
-    <td><%= Member.find(@reservation.member_id).payment%></td>
+    <td><%= "****-****-#{@reservation.member.payment.to_i%10000}"%></td>
   </tr>
   <tr>
-    <th><%= form.label :payment,"クレジットパスワード"%></th>
-    <td><%= form.text_field :payment%><%=form.submit "確認"%></td>
+    <th><%= form.label :payment,"クレジット暗証番号を入力してください(※適当な数字での入力)"%></th>
+    <td><%= text_field_tag :payment%><%=form.submit "確認"%></td>
   </tr>
 </table>

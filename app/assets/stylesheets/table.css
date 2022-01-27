@@ -1,35 +1,39 @@
-table.list,table.attr{
+table.list{
   font-size: 90%;
-  width: 50%;
+  width: 65%;
   margin-bottom: 20px;
 }
-table.list th,table.attr th{
-  text-align: center;
-  color:white;
-  font-weight: normal;
-}
-table.list td,table.list th,
-table.attr td,table.attr th{
+table.list td,table.list th{
   padding:4px;
 }
 table.list th{
+  width: auto;
+  height: 50px;
   text-align:center;
-  width: 25%;
   background: linear-gradient(#74899f,#08111a);
   border-left: 1px solid #74899f;
   border-top: 1px solid #74899f;
   border-bottom: 1px solid #74899f;
   box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.557) inset;
   padding: 2px;
+  text-align: center;
+  color:white;
+  font-weight: normal;
 }
-.button td{
-  width: 100px;
+.listtitle{
+  margin: 0 auto 20px auto;
+  text-align:center;
+  width: 35%;
+  background: linear-gradient(#494c4f,#08111a);
+  border-left: 1px solid #494c4f;
+  border-top: 1px solid #494c4f;
+  border-bottom: 1px solid #494c4f;
+  box-shadow: 0px 1px 1px rgba(109, 32, 32, 0.557) inset;
+  padding: 2px;
 }
-table.attr th{
-  text-align: right;
-  width: 25%;
-}
-table.list td,table.attr td{
+table.list td{
+  width: auto;
+  height: 30px;
   background-color: #888;
   /* width: 75%; */
 }

@@ -1,5 +1,5 @@
 <%=render "shared/errors",obj:@member%>
-<table class="attr">
+<table class="list">
   <tr>
     <th><%= form.label :name%></th>
     <td><%= form.text_field :name%></td>
@@ -29,7 +29,7 @@
   </tr>
   <tr>
     <th><%= form.label :payment%></th>
-    <td><%= form.select :payment,["クレジットカード"]%></td>
+    <td><%= form.text_field :payment%></td>
   </tr>
   <%end%>
 </table>

@@ -1,6 +1,6 @@
 <%@page_title = "admin#show"%>
 <h1><%=@page_title %></h1>
-<table class="attr">
+<table class="list">
   <tr>
     <th width = "150">名前</th>
     <td><%= @admin.name %>  <%=link_to "ログアウト",:admin_session,method: :delete,data:{confirm: "ログアウトしますか?"}%></td>

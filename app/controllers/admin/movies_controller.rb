@@ -61,21 +61,30 @@ class Admin::MoviesController < Admin::Base
     @movie = Movie.find(params[:id])
     p "公開前#{@movie.released_at}と#{Time.current}"
     if @movie.released_at < Time.current && Time.current < @movie.expired_at
+      p "0"
       if params[:movie][:status] == "0"
+        p "1"
         redirect_to [:edit,:admin, @movie],alert: "公開期間中の作品は非公開にできません"
       else
+        p "1-"
         @movie.assign_attributes(movie_params)
         if @movie.save
+          p "2"
           redirect_to :admin_movies, notice: "作品を更新しました。"
         else
-          redirect_to [:edit,:admin, @movie]
+          p "2-"
+          render "edit"
+          # redirect_to [:edit,:admin, @movie],alert: "公開期間中の作品は非公開にできません"
         end
       end
     else
+      p "0-"
       @movie.assign_attributes(movie_params)
       if @movie.save
+        p "11"
         redirect_to :admin_movies, notice: "作品を更新しました。"
       else
+        p "11-"
         render "edit"
       end
     end

@@ -1,31 +1,6 @@
 <%@page_title = "reservaiton#show"%>
 <h1><%=@page_title %></h1>
-<table class="list">
-    <tr>
-        <th>タイトル</th>
-        <td><%=@movie.title %></td>
-    </tr>
-    <tr>
-        <th>概要</th>
-        <td><%=@movie.explanation %></td>
-    </tr>
-    <tr>
-        <th>公開日</th>
-        <td><%=@movie.released_at %></td>
-    </tr>
-    <tr>
-        <th>上映時間</th>
-        <td><%=@movie.screening_time %></td>
-    </tr>
-    <tr>
-        <th>配給</th>
-        <td><%=@movie.distribution %></td>
-    </tr>
-    <tr>
-        <th>監督</th>
-        <td><%=@movie.director %></td>
-    </tr>
-</table>
+
 <%= form_for @reservation, as:"reservation" ,url: :step1_reservation,method: :post do |form| %>
   <%= render "shared/reservation_form", form: form %>
   <%= form.hidden_field :id,value:@reservation.id%>

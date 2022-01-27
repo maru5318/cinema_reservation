@@ -6,12 +6,20 @@ class MoviesController < ApplicationController
         @movie = Movie.find_by(id: params[:id])
         if params[:theater_id].present?
             if Time.current.month.to_i < 10
-                a = Date.parse("#{Time.current.year}-0#{Time.current.month}-#{Time.current.day}")
+                month = "0#{Time.current.month}"
             else
-                a = Date.parse("#{Time.current.year}-#{Time.current.month}-#{Time.current.day}")
+                month = "#{Time.current.month}"
             end
+            if Time.current.day.to_i < 10
+                day = "0#{Time.current.day}"
+            else
+                day = "#{Time.current.day}"
+            end
+            a = Date.parse("#{Time.current.year}-#{month}-#{day}")
+            p "今日の日にち#{a.since(6.days)}"
             @schedule = Schedule.where(theater_id:params[:theater_id],movie_id:params[:id]).where("screening_date = ?",a)
-            @schedule_will = Schedule.where(theater_id:params[:theater_id],movie_id:params[:id]).where("screening_date < ?",a.since(6.days))
+            @schedule_will = Schedule.where(theater_id:params[:theater_id],movie_id:params[:id]).where("screening_date <= ?",a.since(6.days))
+            p "上映#{@schedule_will.count}"
         else
             @movie = Movie.find_by(id: params[:id])
             @schedule_day = Schedule.where(movie_id: @movie.id) 

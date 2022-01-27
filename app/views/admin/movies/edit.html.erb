@@ -4,10 +4,6 @@
 
 <div class="toolbar"><%= link_to "作品の一覧に戻る", :admin_movies %></div>
 
-<%if flash.alert%>
-  <p class="alert"><%=flash.alert %></p>
-<%end%>
-
 <%= form_for [:admin, @movie] do |form| %>
   <%= render "shared/movie_form", form: form %>
   <div><%= form.submit %></div>

@@ -87,8 +87,8 @@
         <%end%>
     </tbody>
 </table>
-<div style="text-align:right"><%= link_to "#{@schedule[0].theater.store_name}での上映中作品一覧を見る",theater_path(@schedule[0].theater_id)%></div>
-<div style="text-align:right"><%= link_to "作品詳細を見る",movie_path(@movie) %></div>
+<div class="link"><%= link_to "#{@schedule[0].theater.store_name}での上映中作品一覧を見る",theater_path(@schedule[0].theater_id)%></div>
+<div class="link"><%= link_to "作品詳細を見る",movie_path(@movie) %></div>
 <%elsif @schedule_will.present?%><%# 上映はあるが当日にない場合%>
     <table class="list button">
         <tbody>
@@ -107,7 +107,7 @@
         </tbody>
     </table>
     <p><%="本日#{Time.current.month}/#{Time.current.day}の上映はありません"%></p>
-    <div style="text-align:right"><%= link_to "戻る",movie_path(@movie.id) %></div>
+    <div class="link"><%= link_to "戻る",movie_path(@movie.id) %></div>
 <%elsif @movie.released_at <= Time.current.since(6.days) && Time.current <= @movie.expired_at && @schedule_day.present?%><%# 上映詳細の際にスケジュールがあるものに関して%>
     <h2>上映している映画館一覧</h2>
     <table class="list">
@@ -126,16 +126,16 @@
         <%@new_theater.each do |t|%>
             <tr>
                 <td><%=link_to "#{t}で#{@movie.title}を見る",[Theater.find_by(store_name:t),@movie]%></td>
-                <td><div style="text-align:right"><%= link_to "#{t}での上映中作品一覧を見る",theater_path(Theater.find_by(store_name:t).id)%></div></td>
+                <td><%= link_to "#{t}での上映中作品一覧を見る",theater_path(Theater.find_by(store_name:t).id)%></td>
             </tr>
         <%end%>
     </tbody>
     </table>
-    <div style="text-align:right"><%= link_to "映画作品一覧を見る",:movies %></div>
+    <div class="link"><%= link_to "映画作品一覧を見る",:movies %></div>
 <%elsif @movie.released_at <= Time.current.since(6.days) && Time.current <= @movie.expired_at && !@schedule_day.present? || !(@movie.released_at <= Time.current.since(6.days) && Time.current <= @movie.expired_at)%><%# 順調に上映がしっかりある時%>
     <h2>現在上映されている劇場がございません</h2>
     <h4><%="#{@movie.released_at}から上映開始です。お楽しみに！" if @movie.released_at > Time.current.since(6.days)%></h4>
-    <div style="text-align:right"><%= link_to "戻る",:movies %></div>
+    <div class="link"><%= link_to "戻る",:movies %></div>
 <%else %>
     <table class="list button">
         <tbody>

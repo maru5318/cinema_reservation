@@ -16,7 +16,7 @@ class Admin::SchedulesController < Admin::Base
   def create
     @movies = Movie.order("id")
     @schedule = Schedule.new(schedule_params)
-    if Movie.find(@schedule.movie_id).released_at < @schedule.screening_date && @schedule.screening_date < Movie.find(@schedule.movie_id).expired_at
+    if Movie.find(@schedule.movie_id).released_at <= @schedule.screening_date && @schedule.screening_date <= Movie.find(@schedule.movie_id).expired_at
       if @schedule.screening_date > Time.current
         @schedule.endtime = @schedule.starttime + @schedule.movie.screening_time*60
         p "上映時間=#{@schedule.movie.screening_time}"

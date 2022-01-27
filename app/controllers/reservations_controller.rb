@@ -67,16 +67,18 @@ class ReservationsController < ApplicationController
         end 
     end
     def step3
-        p "step3#{params[:reservation][:payment]}"
+        p "step3#{params[:payment]}"
         @reservation = Reservation.find_by(id:params[:reservation][:id])
-        @reservation.payment = params[:reservation][:payment]
+        @reservation.payment = params[:payment]
         if @reservation.save
             p"更新できましたstep3"
+            p "step3#{@reservation.payment}"
         else
             p"更新できませんでした"
         end
-        @member = Member.find(@reservation.member_id)
-        @schedule = Schedule.find(@reservation.schedule_id)
+        @member = @reservation.member
+        @schedule = @reservation.schedule
+        @movie = @schedule.movie
     end
     def show
         @reservation = Reservation.new(
@@ -85,8 +87,6 @@ class ReservationsController < ApplicationController
             confirm_time: Time.current,
             status: 0
         )
-        @schedule = Schedule.find(params[:schedule_id])
-        @movie = Movie.find(@schedule.movie.id)
         if @reservation.save
             p"仮登録できました"
         else
@@ -98,8 +98,9 @@ class ReservationsController < ApplicationController
         check = false
         p "update#{params[:format]}"
         @reservation = Reservation.find(params[:format])
-        @member = Member.find(@reservation.member_id)
-        @schedule = Schedule.find(@reservation.schedule_id)
+        @member = @reservation.member
+        @schedule = @reservation.schedule
+        @movie = @schedule.movie
         @reservationdetails = Reservationdetail.where(reservation_id:@reservation.id)
         @reservationdetails.each do |r|
             if Reservationdetail.where(seat:r.seat).present?
@@ -108,7 +109,7 @@ class ReservationsController < ApplicationController
                     p"座席被り1#{Reservation.find(o.reservation_id).status}"
                     p"座席被り2#{Reservation.find(o.reservation_id).status==1}"
                     p"座席被り3#{Reservation.find(o.reservation_id).status==1&& o.reservation.schedule.id == r.reservation.schedule.id}"
-                    if Reservation.find(o.reservation_id).status == 1 && o.reservation.schedule.id == r.reservation.schedule.id
+                    if o.reservation.status == 1 && o.reservation.schedule.id == r.reservation.schedule.id
                         check = true
                     end
                 end
