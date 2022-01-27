@@ -1,10 +1,19 @@
-<table class="attr">
-  <tr>
+<table class="list">
   <%chiket_sheets = {"0":0, "1": 1, "2": 2, "3": 3,"4": 4, "5": 5, "6": 6,"7": 7, "8": 8, "9": 9}%>
-    <th>大人 | 枚数:<%= select_tag "adult", options_for_select(chiket_sheets, 0)%></th>
-    <th>中高生 | 枚数:<%= select_tag "student", options_for_select(chiket_sheets, 0)%></th>
-    <th>小学生 | 枚数:<%= select_tag "children", options_for_select(chiket_sheets, 0)%></th>
-    <th>幼児 | 枚数:<%= select_tag "infant",options_for_select(chiket_sheets, 0) %></th>
-    <%# 後で名前を変更すること %>
+  <tr>
+    <th>大人 | 2000円</th>
+    <td>枚数:<%= select_tag "adult", options_for_select(chiket_sheets, 0)%></td>
+  </tr>
+  <tr>
+    <th>中高生 | 1500円</th>
+    <td>枚数:<%= select_tag "student", options_for_select(chiket_sheets, 0)%></td>
+  </tr>
+  <tr>
+    <th>小学生 | 1000円</th>
+    <td>枚数:<%= select_tag "children", options_for_select(chiket_sheets, 0)%></td>
+  </tr>
+  <tr>
+    <th>幼児 | 500円</th>
+    <td>枚数:<%= select_tag "infant",options_for_select(chiket_sheets, 0) %></td>
   </tr>
 </table>

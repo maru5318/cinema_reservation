@@ -85,6 +85,8 @@ class ReservationsController < ApplicationController
             confirm_time: Time.current,
             status: 0
         )
+        @schedule = Schedule.find(params[:schedule_id])
+        @movie = Movie.find(@schedule.movie.id)
         if @reservation.save
             p"仮登録できました"
         else
@@ -96,6 +98,8 @@ class ReservationsController < ApplicationController
         check = false
         p "update#{params[:format]}"
         @reservation = Reservation.find(params[:format])
+        @member = Member.find(@reservation.member_id)
+        @schedule = Schedule.find(@reservation.schedule_id)
         @reservationdetails = Reservationdetail.where(reservation_id:@reservation.id)
         @reservationdetails.each do |r|
             if Reservationdetail.where(seat:r.seat).present?
@@ -106,8 +110,6 @@ class ReservationsController < ApplicationController
                     p"座席被り3#{Reservation.find(o.reservation_id).status==1&& o.reservation.schedule.id == r.reservation.schedule.id}"
                     if Reservation.find(o.reservation_id).status == 1 && o.reservation.schedule.id == r.reservation.schedule.id
                         check = true
-                    else
-                        p"問題なし"
                     end
                 end
             end

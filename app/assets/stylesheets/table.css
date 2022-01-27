@@ -31,7 +31,7 @@ table.attr th{
 }
 table.list td,table.attr td{
   background-color: #888;
-  width: 75%;
+  /* width: 75%; */
 }
 table{
   margin:auto;
