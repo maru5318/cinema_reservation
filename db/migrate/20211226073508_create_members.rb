@@ -6,7 +6,7 @@ class CreateMembers < ActiveRecord::Migration[5.2]
       t.date :birthday,null: false
       t.string :tel,null: false
       t.string :email,null: false
-      t.string :payment
+      t.string :payment,null: false
       t.timestamps
     end
   end
