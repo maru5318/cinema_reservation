@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     class Forbidden < StandardError;end
     #StandardErrorクラスを継承してLoginRequiredクラスとForbiddenクラスを定義
 
-    if Rails.env.production? || ENV["RESCUE_EXCEPTIONS"]#救援_例外
+    # if Rails.env.production? || ENV["RESCUE_EXCEPTIONS"]#救援_例外
     rescue_from StandardError,with: :rescue_internal_server_error
     rescue_from ActiveRecord::RecordNotFound,with: :rescue_not_found
     rescue_from ActionController::ParameterMissing,with: :rescue_bad_request
