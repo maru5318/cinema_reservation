@@ -34,8 +34,4 @@ class Member < ApplicationRecord
     format: { with: /\A[A-Za-z0-9]*\z/,allow_blank: true,message: 'はアルファベットと数字で入力してください。'},
     length: { minimum:4,maximum:8,allow_blank: true,message: 'は4文字以上8文字以内で入力してください。'},
     uniqueness: {case_sensitive: false,allow_blank: true}
-    validates :payment, presence: true,
-    format: { with: /\A[0-9]+\z/,allow_blank: true,message: 'は数字のみで入力してください。'},
-    length: { minimum:12,maximum:12,allow_blank: true,message: 'は12桁で入力してください。'},
-    uniqueness: {case_sensitive: false,allow_blank: true}
 end
